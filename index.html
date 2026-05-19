@@ -188,9 +188,9 @@
   .adj-output-val{font-family:var(--mono);font-size:1.3rem;font-weight:800;color:var(--warning)}
   .adj-output-val.zero{color:var(--green)}
 
-  .sub{margin-top:1rem;padding-top:.875rem;border-top:1px solid var(--line-3);display:flex;justify-content:space-between;align-items:baseline}
-  .sub-lbl{font-size:.7rem;color:var(--txt-3);letter-spacing:.18em;text-transform:uppercase}
-  .sub-val{font-family:var(--mono);font-size:1.15rem;font-weight:600;color:#fff}
+  .sub{margin-top:1.25rem;padding:1rem 1.2rem;background:linear-gradient(135deg,#1C2541 0%,#28335a 100%);border:1px solid var(--bg-dark-3);border-radius:10px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 3px 10px rgba(28,37,65,.12)}
+  .sub-lbl{font-size:.72rem;color:#d4d9e8;letter-spacing:.18em;text-transform:uppercase;font-weight:600}
+  .sub-val{font-family:var(--mono);font-size:1.3rem;font-weight:700;color:#F0C419;letter-spacing:.01em}
 
   /* SUMMARY */
   .sum{
@@ -409,7 +409,19 @@
 
   input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
   input[type=number]{-moz-appearance:textfield}
-</style>
+
+  /* PRINT STYLES */
+  @media print {
+    body, html { background: #ffffff !important; }
+    body::before, body::after { display: none !important; }
+    .head { background: #1C2541 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .tabs, .acts, .gate { display: none !important; }
+    .panel:not(.active) { display: none !important; }
+    .panel.active { display: block !important; }
+    .card, .sub, .sum, .res { page-break-inside: avoid; box-shadow: none !important; }
+    .sub, .sum, .res { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+  </style>
 </head>
 <body>
 
@@ -573,8 +585,13 @@
           <div class="card-title"><em>Potongan</em></div>
           <div class="card-sub">Deduction</div>
         </div>
-        <div class="items" id="oDItems"></div>
-        <button class="btn-add" onclick="addOverlapDeduction()">＋ Add Potongan</button>
+        <div class="field">
+          <div class="field-row">
+            <span class="field-name">Jumlah Potongan</span>
+            <span class="field-tag">TOTAL</span>
+          </div>
+          <input type="number" class="field-input" id="oPotonganTotal" placeholder="0.00" step="0.01" min="0" inputmode="decimal">
+        </div>
         <div class="sub">
           <span class="sub-lbl">Jumlah Potongan</span>
           <span class="sub-val" id="oTotalD">RM 0.00</span>
@@ -638,7 +655,7 @@
         </div>
         <div class="adj" style="background:linear-gradient(180deg,rgba(229,135,81,.04) 0%,var(--bg-3) 70%);border-left-color:var(--orange)">
           <div class="field-row"><span class="field-name" style="color:var(--orange)">Koperasi Payout</span><span class="field-tag">%</span></div>
-          <input type="number" class="field-input" id="oPayoutPct" placeholder="70" step="0.01" min="0" max="100" inputmode="decimal" style="color:#ffe0c5;border-color:rgba(229,135,81,.25)">
+          <input type="number" class="field-input" id="oPayoutPct" placeholder="70" step="0.01" min="0" max="100" inputmode="decimal" style="color:#000000;font-weight:700;border-color:var(--orange-bd)">
         </div>
       </div>
 
@@ -673,7 +690,8 @@
       </div>
     </div>
 
-    <div class="acts">
+        <div class="acts">
+      <button class="btn" onclick="window.print()">Print</button>
       <button class="btn danger" onclick="resetOverlap()">Reset</button>
     </div>
   </div>
@@ -900,7 +918,6 @@
     });
 
     initOverlap();
-    initOverlap();
     initCodeChecker();
 
     updateDT();
@@ -1063,145 +1080,6 @@
 
 
   /* ============ OVERLAP MODE ============ */
-  function initOverlap() {
-    ['oPendapatan','oReject','oPkgName','oPkgAmount','oPkgTahun','oPkgBulan','oPkgPayout'].forEach(id => {
-      document.getElementById(id).addEventListener('input', calcOverlap);
-    });
-    if (document.getElementById('oDItems').children.length === 0) {
-      for (let i = 0; i < 3; i++) addOverlapDeduction();
-    }
-    if (document.getElementById('oOLItems').children.length === 0) {
-      for (let i = 0; i < 2; i++) addOverlapLoan();
-    }
-    calcOverlap();
-  }
-
-  function addOverlapDeduction() {
-    const wrap = document.getElementById('oDItems');
-    const row = document.createElement('div');
-    row.className = 'item';
-    row.innerHTML = `
-      <input type="text" class="input" placeholder="Description">
-      <input type="number" class="input input-amt" placeholder="0.00" step="0.01" min="0" inputmode="decimal">
-      <button class="item-x" title="Remove">×</button>
-    `;
-    const [desc, amt, x] = row.children;
-    desc.addEventListener('input', calcOverlap);
-    amt.addEventListener('input', calcOverlap);
-    x.addEventListener('click', () => { row.remove(); calcOverlap(); });
-    wrap.appendChild(row);
-  }
-
-  function addOverlapLoan() {
-    const wrap = document.getElementById('oOLItems');
-    const row = document.createElement('div');
-    row.className = 'ol-item';
-    row.innerHTML = `
-      <input type="text" class="input" placeholder="Loan name (e.g. Loan A)">
-      <input type="number" class="input input-amt ol-amt" placeholder="Amount" step="0.01" min="0" inputmode="decimal">
-      <input type="number" class="input input-amt ol-bln" placeholder="Bulanan" step="0.01" min="0" inputmode="decimal">
-      <button class="item-x" title="Remove">×</button>
-    `;
-    const [desc, amt, bln, x] = row.children;
-    desc.addEventListener('input', calcOverlap);
-    amt.addEventListener('input', calcOverlap);
-    bln.addEventListener('input', calcOverlap);
-    x.addEventListener('click', () => { row.remove(); calcOverlap(); });
-    wrap.appendChild(row);
-  }
-
-  function calcOverlap() {
-    const rawP   = parseFloat(document.getElementById('oPendapatan').value) || 0;
-    const reject = parseFloat(document.getElementById('oReject').value) || 0;
-    const netP   = Math.max(0, rawP - reject);
-
-    // Sum Potongan items
-    let totalD = 0;
-    document.querySelectorAll('#oDItems .input-amt').forEach(i => {
-      const v = parseFloat(i.value); if (!isNaN(v)) totalD += v;
-    });
-
-    const gaji = netP - totalD;
-    const pct  = netP > 0 ? (gaji / netP) * 100 : 0;
-
-    // Sum overlap items
-    let totalOLAmt = 0, totalOLBln = 0;
-    document.querySelectorAll('#oOLItems .ol-amt').forEach(i => {
-      const v = parseFloat(i.value); if (!isNaN(v)) totalOLAmt += v;
-    });
-    document.querySelectorAll('#oOLItems .ol-bln').forEach(i => {
-      const v = parseFloat(i.value); if (!isNaN(v)) totalOLBln += v;
-    });
-
-    const loan60 = netP * 0.6 - totalD;
-    const tambahan = totalOLBln;
-    const layak = loan60 + tambahan;
-
-    // Package inputs
-    const pkgAmount = parseFloat(document.getElementById('oPkgAmount').value) || 0;
-    const pkgPayout = parseFloat(document.getElementById('oPkgPayout').value) || 0;
-    const pkgBulan  = parseFloat(document.getElementById('oPkgBulan').value) || 0;
-
-    const payout = pkgAmount * pkgPayout / 100;
-
-    // Display
-    document.getElementById('oNetP').textContent = fmt(netP);
-    document.getElementById('oTotalD').textContent = fmt(totalD);
-    document.getElementById('oSP').textContent = fmt(netP);
-    document.getElementById('oSD').textContent = fmt(totalD);
-    document.getElementById('oSG').textContent = fmt(gaji);
-    document.getElementById('oSPct').textContent = pct.toFixed(2) + '%';
-    document.getElementById('oLoan60').textContent = fmt(loan60);
-    document.getElementById('oTambahan').textContent = '＋ ' + fmt(tambahan);
-    document.getElementById('oLayak').textContent = fmt(layak);
-    document.getElementById('oTotalOLAmt').textContent = fmt(totalOLAmt);
-    document.getElementById('oTotalOLBln').textContent = fmt(totalOLBln);
-
-    // Payout
-    const payoutEl = document.getElementById('oPayout');
-    const formulaEl = document.getElementById('oPayoutFormula');
-    const statusEl = document.getElementById('oPayoutStatus');
-
-    payoutEl.classList.remove('neg', 'zero');
-    if (pkgAmount > 0 && pkgPayout > 0) {
-      payoutEl.textContent = fmt(payout);
-      formulaEl.textContent = `RM ${pkgAmount.toFixed(2)} × ${pkgPayout}%`;
-    } else {
-      payoutEl.textContent = fmt(0);
-      payoutEl.classList.add('zero');
-      formulaEl.textContent = 'Loan Amount × Payout%';
-    }
-
-    // Status: compare Bulanan Layak vs Package Bulan
-    statusEl.classList.remove('good', 'bad');
-    if (pkgBulan > 0) {
-      const diff = layak - pkgBulan;
-      if (diff >= 0) {
-        statusEl.textContent = `✓ Bulanan Layak cukup (lebih RM ${diff.toFixed(2)})`;
-        statusEl.classList.add('good');
-      } else {
-        statusEl.textContent = `✗ Bulanan Layak kurang RM ${Math.abs(diff).toFixed(2)}`;
-        statusEl.classList.add('bad');
-      }
-    } else if (pkgAmount > 0) {
-      statusEl.textContent = 'Isi Bulan untuk semak kelayakan';
-    } else {
-      statusEl.textContent = 'Isi maklumat untuk pengiraan';
-    }
-  }
-
-  function resetOverlap() {
-    if (!confirm('Reset semua maklumat Overlap?')) return;
-    ['oPendapatan','oReject','oPkgName','oPkgAmount','oPkgTahun','oPkgBulan','oPkgPayout'].forEach(id => {
-      document.getElementById(id).value = '';
-    });
-    document.getElementById('oDItems').innerHTML = '';
-    document.getElementById('oOLItems').innerHTML = '';
-    for (let i = 0; i < 3; i++) addOverlapDeduction();
-    for (let i = 0; i < 2; i++) addOverlapLoan();
-    calcOverlap();
-  }
-
   /* ============ SEARCH ENGINE ============ */
   const ABBREV = [
     [/\bbyrn\b/g, 'bayaran'],
@@ -2494,22 +2372,6 @@
 
 
   /* ============ OVERLAP MODE ============ */
-  function addOverlapDeduction() {
-    const wrap = document.getElementById('oDItems');
-    const row = document.createElement('div');
-    row.className = 'item';
-    row.innerHTML = `
-      <input type="text" class="input" placeholder="Description">
-      <input type="number" class="input input-amt" placeholder="0.00" step="0.01" min="0" inputmode="decimal">
-      <button class="item-x" title="Remove">×</button>
-    `;
-    const [, amt, x] = row.children;
-    row.children[0].addEventListener('input', calcOverlap);
-    amt.addEventListener('input', calcOverlap);
-    x.addEventListener('click', () => { row.remove(); calcOverlap(); });
-    wrap.appendChild(row);
-  }
-
   function addOverlapLoan() {
     const wrap = document.getElementById('oOverlapItems');
     const row = document.createElement('div');
@@ -2542,13 +2404,7 @@
     const reject = parseFloat(document.getElementById('oReject').value) || 0;
     const totalP = Math.max(0, rawP - reject);
 
-    const totalD = (() => {
-      let t = 0;
-      document.querySelectorAll('#oDItems .input-amt').forEach(i => {
-        const v = parseFloat(i.value); if (!isNaN(v)) t += v;
-      });
-      return t;
-    })();
+    const totalD = parseFloat(document.getElementById('oPotonganTotal').value) || 0;
 
     const gaji = totalP - totalD;
     const pct  = totalP > 0 ? (gaji / totalP) * 100 : 0;
@@ -2614,22 +2470,25 @@
 
   function resetOverlap() {
     if (!confirm('Reset semua maklumat Overlap?')) return;
-    ['oPendapatan','oReject','oPackageName','oLoanAmount','oBulan','oPayoutPct'].forEach(id => {
-      document.getElementById(id).value = '';
+    ['oPendapatan','oReject','oPotonganTotal','oPackageName','oLoanAmount','oBulan','oPayoutPct'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
     });
-    document.getElementById('oDItems').innerHTML = '';
     document.getElementById('oOverlapItems').innerHTML = '';
-    for (let i = 0; i < 3; i++) addOverlapDeduction();
     for (let i = 0; i < 2; i++) addOverlapLoan();
     calcOverlap();
   }
 
   function initOverlap() {
-    ['oPendapatan','oReject','oPackageName','oLoanAmount','oBulan','oPayoutPct'].forEach(id => {
-      document.getElementById(id).addEventListener('input', calcOverlap);
+    if (window._overlapInited) return;  // prevent double-init
+    window._overlapInited = true;
+    ['oPendapatan','oReject','oPotonganTotal','oPackageName','oLoanAmount','oBulan','oPayoutPct'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('input', calcOverlap);
     });
-    for (let i = 0; i < 3; i++) addOverlapDeduction();
-    for (let i = 0; i < 2; i++) addOverlapLoan();
+    if (document.getElementById('oOverlapItems').children.length === 0) {
+      for (let i = 0; i < 2; i++) addOverlapLoan();
+    }
     calcOverlap();
   }
 
