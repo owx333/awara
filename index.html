@@ -7,107 +7,107 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'DM Sans',sans-serif;background:#07101f;color:#c5d0e0;min-height:100vh}
+body{font-family:'DM Sans',sans-serif;background:#0f1f3d;color:#dce8f8;min-height:100vh}
 /* LAYOUT */
 .app-wrap{display:flex;min-height:100vh}
-.sb{width:200px;min-height:100vh;background:#07101f;border-right:1px solid #142440;display:flex;flex-direction:column;padding:1.4rem .65rem;flex-shrink:0;position:sticky;top:0;height:100vh}
-.sbn{font-family:'Playfair Display',serif;font-size:.88rem;color:#c9a84c;font-weight:700;line-height:1.35}
-.sbs{font-size:.58rem;color:#3a4e68;letter-spacing:.14em;text-transform:uppercase;margin-top:.15rem}
-.sdiv{border:none;border-top:1px solid #142440;margin:.65rem 0}
+.sb{width:200px;min-height:100vh;background:#0f1f3d;border-right:1px solid #1e3660;display:flex;flex-direction:column;padding:1.4rem .65rem;flex-shrink:0;position:sticky;top:0;height:100vh}
+.sbn{font-family:'Playfair Display',serif;font-size:.88rem;color:#f5c842;font-weight:700;line-height:1.35}
+.sbs{font-size:.58rem;color:#7090b8;letter-spacing:.14em;text-transform:uppercase;margin-top:.15rem}
+.sdiv{border:none;border-top:1px solid #1e3660;margin:.65rem 0}
 .snav{display:flex;flex-direction:column;gap:.08rem;flex:1}
-.ni{background:none;border:none;color:#3a4e68;padding:.48rem .62rem;border-radius:7px;text-align:left;cursor:pointer;font-size:.76rem;font-family:inherit;transition:all .15s;display:flex;align-items:center;gap:.4rem;width:100%}
-.ni:hover{background:#0e1e36;color:#b0c0d0}
-.ni.on{background:#102040;color:#c9a84c;font-weight:600}
-.ni.lo{color:#a84040;margin-top:auto}
+.ni{background:none;border:none;color:#7090b8;padding:.48rem .62rem;border-radius:7px;text-align:left;cursor:pointer;font-size:.76rem;font-family:inherit;transition:all .15s;display:flex;align-items:center;gap:.4rem;width:100%}
+.ni:hover{background:#162e52;color:#c8daf0}
+.ni.on{background:#1a3560;color:#f5c842;font-weight:600}
+.ni.lo{color:#e05555;margin-top:auto}
 .ni.lo:hover{background:#2a0e0e}
 .mn{flex:1;padding:1.5rem 1.75rem;overflow:auto;min-width:0}
 /* LOGIN */
-.lbg{display:flex;align-items:center;justify-content:center;min-height:100vh;background:#07101f}
-.lc{background:#0b1b32;border:1px solid #142440;border-radius:16px;padding:2.2rem;width:340px;box-shadow:0 24px 60px rgba(0,0,0,.65)}
-.lco{font-family:'Playfair Display',serif;font-size:1.3rem;color:#c9a84c;text-align:center;font-weight:700}
-.lsub{color:#3a4e68;font-size:.7rem;text-align:center;letter-spacing:.12em;text-transform:uppercase;margin:.3rem 0 1.4rem}
-.ltabs{display:flex;background:#060f1c;border-radius:8px;padding:.25rem;gap:.25rem;margin-bottom:1.3rem}
-.ltab{flex:1;border:none;border-radius:6px;padding:.5rem;cursor:pointer;font-family:inherit;font-size:.78rem;font-weight:600;background:none;color:#3a4e68;transition:all .18s}
-.ltab.on{background:#102040;color:#c9a84c;box-shadow:0 2px 8px rgba(0,0,0,.4)}
-.ll{color:#3a4e68;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.3rem;display:block}
-.li{width:100%;background:#060f1c;border:1px solid #142440;border-radius:8px;padding:.62rem .85rem;color:#c5d0e0;font-size:.92rem;font-family:inherit;outline:none;transition:border .15s;margin-bottom:.35rem}
-.li:focus{border-color:#c9a84c66}
-.li.err{border-color:#a84040}
-.lerr{color:#a84040;font-size:.7rem;margin-bottom:.5rem}
-.bgld{background:linear-gradient(135deg,#9e7c1a,#c9a84c);color:#07101f;border:none;border-radius:8px;padding:.62rem;font-weight:700;cursor:pointer;font-family:inherit;font-size:.86rem;width:100%;margin-top:.5rem;transition:opacity .15s}
+.lbg{display:flex;align-items:center;justify-content:center;min-height:100vh;background:#0f1f3d}
+.lc{background:#162a4a;border:1px solid #1e3660;border-radius:16px;padding:2.2rem;width:340px;box-shadow:0 24px 60px rgba(0,0,0,.65)}
+.lco{font-family:'Playfair Display',serif;font-size:1.3rem;color:#f5c842;text-align:center;font-weight:700}
+.lsub{color:#7090b8;font-size:.7rem;text-align:center;letter-spacing:.12em;text-transform:uppercase;margin:.3rem 0 1.4rem}
+.ltabs{display:flex;background:#111f38;border-radius:8px;padding:.25rem;gap:.25rem;margin-bottom:1.3rem}
+.ltab{flex:1;border:none;border-radius:6px;padding:.5rem;cursor:pointer;font-family:inherit;font-size:.78rem;font-weight:600;background:none;color:#7090b8;transition:all .18s}
+.ltab.on{background:#1a3560;color:#f5c842;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.ll{color:#7090b8;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.3rem;display:block}
+.li{width:100%;background:#111f38;border:1px solid #1e3660;border-radius:8px;padding:.62rem .85rem;color:#dce8f8;font-size:.92rem;font-family:inherit;outline:none;transition:border .15s;margin-bottom:.35rem}
+.li:focus{border-color:#f5c84266}
+.li.err{border-color:#e05555}
+.lerr{color:#e05555;font-size:.7rem;margin-bottom:.5rem}
+.bgld{background:linear-gradient(135deg,#c9a030,#f5c842);color:#0f1f3d;border:none;border-radius:8px;padding:.62rem;font-weight:700;cursor:pointer;font-family:inherit;font-size:.86rem;width:100%;margin-top:.5rem;transition:opacity .15s}
 .bgld:hover{opacity:.86}
 /* PAGE TITLE */
-.pt{font-family:'Playfair Display',serif;font-size:1.38rem;color:#c9a84c;margin-bottom:1.25rem;display:flex;align-items:baseline;gap:.55rem}
-.pts{font-size:.66rem;color:#3a4e68;font-family:'DM Sans',sans-serif;font-weight:400;letter-spacing:.08em;text-transform:uppercase}
+.pt{font-family:'Playfair Display',serif;font-size:1.38rem;color:#f5c842;margin-bottom:1.25rem;display:flex;align-items:baseline;gap:.55rem}
+.pts{font-size:.66rem;color:#7090b8;font-family:'DM Sans',sans-serif;font-weight:400;letter-spacing:.08em;text-transform:uppercase}
 /* STATS */
 .sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(142px,1fr));gap:.82rem;margin-bottom:1.25rem}
-.sc{background:#0b1b32;border:1px solid #142440;border-radius:11px;padding:.92rem 1.1rem}
-.sv{font-size:1.3rem;font-weight:700;color:#c9a84c;font-feature-settings:'tnum'}
-.sv.g{color:#2ea85e}
-.sv.r{color:#a84040}
-.sl{font-size:.62rem;color:#3a4e68;margin-top:.14rem;text-transform:uppercase;letter-spacing:.06em}
+.sc{background:#162a4a;border:1px solid #1e3660;border-radius:11px;padding:.92rem 1.1rem}
+.sv{font-size:1.3rem;font-weight:700;color:#f5c842;font-feature-settings:'tnum'}
+.sv.g{color:#38d474}
+.sv.r{color:#e05555}
+.sl{font-size:.62rem;color:#7090b8;margin-top:.14rem;text-transform:uppercase;letter-spacing:.06em}
 /* CONTROLS */
 .cr{display:flex;align-items:center;gap:.58rem;margin-bottom:1.1rem;flex-wrap:wrap}
-.cs{background:#0b1b32;border:1px solid #142440;border-radius:7px;padding:.38rem .52rem;color:#c5d0e0;font-family:inherit;font-size:.78rem;outline:none;cursor:pointer}
-.cs:focus{border-color:#c9a84c55}
-.cni{background:#0b1b32;border:1px solid #142440;border-radius:7px;padding:.38rem .46rem;color:#c5d0e0;font-family:inherit;font-size:.78rem;width:62px;text-align:center;outline:none}
-.cni:focus{border-color:#c9a84c55}
-.bs{background:#102040;border:none;color:#c9a84c;border-radius:6px;padding:.34rem .76rem;cursor:pointer;font-family:inherit;font-size:.72rem;font-weight:600;transition:background .15s;white-space:nowrap}
-.bs:hover{background:#182e54}
-.bp{background:#0b1b32;border:1px solid rgba(201,168,76,.3);color:#c9a84c;border-radius:4px;padding:.24rem .46rem;cursor:pointer;font-size:.66rem;font-family:inherit;transition:all .15s}
-.bp:hover{background:#c9a84c;color:#07101f}
-.bo{background:none;border:1px solid #142440;color:#3a4e68;border-radius:7px;padding:.46rem .92rem;cursor:pointer;font-family:inherit;font-size:.78rem}
-.bo:hover{border-color:#3a4e68;color:#c5d0e0}
+.cs{background:#162a4a;border:1px solid #1e3660;border-radius:7px;padding:.38rem .52rem;color:#dce8f8;font-family:inherit;font-size:.78rem;outline:none;cursor:pointer}
+.cs:focus{border-color:#f5c84255}
+.cni{background:#162a4a;border:1px solid #1e3660;border-radius:7px;padding:.38rem .46rem;color:#dce8f8;font-family:inherit;font-size:.78rem;width:62px;text-align:center;outline:none}
+.cni:focus{border-color:#f5c84255}
+.bs{background:#1a3560;border:none;color:#f5c842;border-radius:6px;padding:.34rem .76rem;cursor:pointer;font-family:inherit;font-size:.72rem;font-weight:600;transition:background .15s;white-space:nowrap}
+.bs:hover{background:#22406e}
+.bp{background:#162a4a;border:1px solid rgba(201,168,76,.3);color:#f5c842;border-radius:4px;padding:.24rem .46rem;cursor:pointer;font-size:.66rem;font-family:inherit;transition:all .15s}
+.bp:hover{background:#f5c842;color:#0f1f3d}
+.bo{background:none;border:1px solid #1e3660;color:#7090b8;border-radius:7px;padding:.46rem .92rem;cursor:pointer;font-family:inherit;font-size:.78rem}
+.bo:hover{border-color:#7090b8;color:#dce8f8}
 /* TABLE */
-.tw{overflow-x:auto;border-radius:11px;border:1px solid #142440;margin-bottom:1rem}
+.tw{overflow-x:auto;border-radius:11px;border:1px solid #1e3660;margin-bottom:1rem}
 table{border-collapse:collapse;width:100%;min-width:1050px;font-size:.75rem}
-th{background:#060f1c;color:#3a4e68;padding:.46rem .56rem;text-align:left;font-weight:600;font-size:.62rem;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid #142440}
-td{padding:.38rem .56rem;border-bottom:1px solid #0b1525;vertical-align:middle;white-space:nowrap}
+th{background:#111f38;color:#7090b8;padding:.46rem .56rem;text-align:left;font-weight:600;font-size:.62rem;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid #1e3660}
+td{padding:.38rem .56rem;border-bottom:1px solid #111f38;vertical-align:middle;white-space:nowrap}
 tr:last-child td{border-bottom:none}
 tr:hover td{background:rgba(201,168,76,.025)}
-.tn{text-align:right;color:#c9a84c;font-feature-settings:'tnum'}
-.tg{text-align:right;color:#2ea85e;font-weight:600;font-feature-settings:'tnum'}
-.tr{text-align:right;color:#a84040;font-feature-settings:'tnum'}
-.te{font-weight:600;color:#c5d0e0;max-width:138px;overflow:hidden;text-overflow:ellipsis}
-.te2{font-size:.62rem;color:#3a4e68;margin-top:.06rem}
-.ci{background:#060f1c;border:1px solid #142440;border-radius:4px;padding:.23rem .34rem;color:#c5d0e0;font-family:inherit;font-size:.75rem;width:62px;text-align:right;outline:none}
+.tn{text-align:right;color:#f5c842;font-feature-settings:'tnum'}
+.tg{text-align:right;color:#38d474;font-weight:600;font-feature-settings:'tnum'}
+.tr{text-align:right;color:#e05555;font-feature-settings:'tnum'}
+.te{font-weight:600;color:#dce8f8;max-width:138px;overflow:hidden;text-overflow:ellipsis}
+.te2{font-size:.62rem;color:#7090b8;margin-top:.06rem}
+.ci{background:#111f38;border:1px solid #1e3660;border-radius:4px;padding:.23rem .34rem;color:#dce8f8;font-family:inherit;font-size:.75rem;width:62px;text-align:right;outline:none}
 .ci:focus{border-color:rgba(201,168,76,.45)}
-.tfoot-row{background:#060f1c}
+.tfoot-row{background:#111f38}
 .tfoot-row td{padding:.44rem .56rem}
 /* BADGE */
 .b{display:inline-block;padding:.13rem .38rem;border-radius:4px;font-size:.62rem;font-weight:600}
-.ba{background:#092416;color:#2ea85e}
-.bi{background:#280c0c;color:#a84040}
-.bx{background:#241a06;color:#c9a84c}
+.ba{background:#0b3020;color:#38d474}
+.bi{background:#3a1010;color:#e05555}
+.bx{background:#3a2a08;color:#f5c842}
 /* MODAL */
 .mbg{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem;overflow-y:auto}
-.mb{background:#0b1b32;border:1px solid #142440;border-radius:14px;padding:1.5rem;width:500px;max-height:88vh;overflow-y:auto}
+.mb{background:#162a4a;border:1px solid #1e3660;border-radius:14px;padding:1.5rem;width:500px;max-height:88vh;overflow-y:auto}
 .mb.wide{width:580px}
-.mt{font-family:'Playfair Display',serif;font-size:1.06rem;color:#c9a84c;margin-bottom:1.1rem}
+.mt{font-family:'Playfair Display',serif;font-size:1.06rem;color:#f5c842;margin-bottom:1.1rem}
 .fg{display:grid;grid-template-columns:1fr 1fr;gap:.72rem}
 .fg1{grid-column:1/-1}
-.fl{font-size:.63rem;color:#3a4e68;text-transform:uppercase;letter-spacing:.07em;display:block;margin-bottom:.24rem}
-.fi{background:#060f1c;border:1px solid #142440;border-radius:7px;padding:.48rem .6rem;color:#c5d0e0;font-family:inherit;font-size:.78rem;outline:none;width:100%}
+.fl{font-size:.63rem;color:#7090b8;text-transform:uppercase;letter-spacing:.07em;display:block;margin-bottom:.24rem}
+.fi{background:#111f38;border:1px solid #1e3660;border-radius:7px;padding:.48rem .6rem;color:#dce8f8;font-family:inherit;font-size:.78rem;outline:none;width:100%}
 .fi:focus{border-color:rgba(201,168,76,.38)}
 .fa{display:flex;gap:.48rem;justify-content:flex-end;margin-top:1.1rem}
-.cbr{display:flex;align-items:center;gap:.38rem;cursor:pointer;color:#3a4e68;font-size:.76rem;margin-top:.28rem}
-.cbr input{accent-color:#c9a84c;width:13px;height:13px;cursor:pointer}
+.cbr{display:flex;align-items:center;gap:.38rem;cursor:pointer;color:#7090b8;font-size:.76rem;margin-top:.28rem}
+.cbr input{accent-color:#f5c842;width:13px;height:13px;cursor:pointer}
 .ibtn{background:none;border:none;cursor:pointer;padding:.22rem;border-radius:4px;font-size:.88rem;transition:background .1s}
-.ibtn:hover{background:#142440}
+.ibtn:hover{background:#1e3660}
 /* EMPTY */
-.empty-msg{text-align:center;color:#3a4e68;padding:3rem;font-size:.82rem}
+.empty-msg{text-align:center;color:#7090b8;padding:3rem;font-size:.82rem}
 /* TOAST */
-.toast{position:fixed;bottom:1.4rem;left:50%;transform:translateX(-50%);background:#092416;color:#2ea85e;border:1px solid #1a5230;border-radius:8px;padding:.48rem 1.05rem;font-size:.76rem;z-index:999;pointer-events:none;white-space:nowrap;animation:fin .18s ease}
+.toast{position:fixed;bottom:1.4rem;left:50%;transform:translateX(-50%);background:#0b3020;color:#38d474;border:1px solid #22683e;border-radius:8px;padding:.48rem 1.05rem;font-size:.76rem;z-index:999;pointer-events:none;white-space:nowrap;animation:fin .18s ease}
 @keyframes fin{from{opacity:0;transform:translateX(-50%) translateY(6px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 /* EMPLOYEE APP */
-.emp-hdr{background:#0b1b32;border-bottom:1px solid #142440;padding:.85rem 1.5rem;display:flex;justify-content:space-between;align-items:center}
+.emp-hdr{background:#162a4a;border-bottom:1px solid #1e3660;padding:.85rem 1.5rem;display:flex;justify-content:space-between;align-items:center}
 .emp-body{padding:1.5rem 2rem;max-width:860px;margin:0 auto}
 .emp-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:1.25rem}
 /* EMPLOYER BOX */
-.er-box{background:#0b1b32;border:1px solid #142440;border-radius:11px;padding:.85rem 1.1rem;margin-top:1rem}
+.er-box{background:#162a4a;border:1px solid #1e3660;border-radius:11px;padding:.85rem 1.1rem;margin-top:1rem}
 /* CSV DROP */
-.csv-drop{border:2px dashed #142440;border-radius:10px;padding:1.5rem;text-align:center;cursor:pointer;background:#060f1c;transition:border .15s}
-.csv-drop:hover{border-color:#c9a84c66}
+.csv-drop{border:2px dashed #1e3660;border-radius:10px;padding:1.5rem;text-align:center;cursor:pointer;background:#111f38;transition:border .15s}
+.csv-drop:hover{border-color:#f5c84266}
 /* PAYSLIP */
 .psov{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:1rem;overflow-y:auto}
 .psw{background:#fff;color:#000;width:700px;flex-shrink:0;font-family:Arial,Helvetica,sans-serif;font-size:11px;margin:auto}
@@ -128,13 +128,45 @@ tr:hover td{background:rgba(201,168,76,.025)}
 .psgn{display:flex;justify-content:space-between;border-top:1px solid #999;padding:5px 8px;margin-top:3px;font-size:10px;gap:2rem}
 .psac{display:flex;gap:.6rem;justify-content:center;padding:.72rem;background:#111}
 /* LOADING */
-.loading-screen{display:flex;align-items:center;justify-content:center;height:100vh;color:#c9a84c;font-size:1rem}
+.loading-screen{display:flex;align-items:center;justify-content:center;height:100vh;color:#f5c842;font-size:1rem}
+/* HQ FORMAT */
+.hqov{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:1rem;overflow-y:auto}
+.hqw{background:#fff;color:#000;width:720px;flex-shrink:0;font-family:Arial,Helvetica,sans-serif;font-size:11px;margin:auto;border:1px solid #ccc}
+.hqi{padding:10px 14px}
+.hqco{font-size:16px;font-weight:bold;text-align:center;margin-bottom:8px;letter-spacing:.5px}
+.hqinfo{width:100%;border-collapse:collapse;margin-bottom:6px}
+.hqinfo td{padding:2px 4px;font-size:11px;border:none}
+.hqinfo .hqlb{font-weight:bold;text-decoration:underline;white-space:nowrap}
+.hqinfo .hqval{text-decoration:underline;font-weight:bold}
+.hqmain{width:100%;border-collapse:collapse;margin:4px 0}
+.hqmain th{border:1.5px solid #000;padding:4px 6px;background:#fff;font-size:11px;font-weight:bold;text-align:left}
+.hqmain td{border:1px solid #000;padding:3px 6px;font-size:11px;min-height:18px}
+.hqmain .hqr{text-align:right}
+.hqmain .hqb{font-weight:bold}
+.hqtot{width:100%;border-collapse:collapse;margin-top:6px}
+.hqtot td{padding:3px 6px;font-size:12px;font-weight:bold;border-top:2px solid #000;text-decoration:underline}
+.hqsec{width:100%;border-collapse:collapse;margin-top:6px}
+.hqsec td{border:1px solid #000;padding:4px 6px;font-size:11px}
+.hqsec th{border:1px solid #000;padding:4px 6px;font-size:11px;background:#e0e0e0;font-weight:bold;text-align:center}
+.hqsec .hqb{font-weight:bold}
+.hqleave{width:100%;border-collapse:collapse;margin-top:4px}
+.hqleave th{border:1px solid #000;padding:3px 6px;font-size:10px;background:#e0e0e0;font-weight:bold;text-align:center}
+.hqleave td{border:1px solid #000;padding:3px 6px;font-size:11px}
+.hqsgn{display:flex;justify-content:space-between;margin-top:10px;padding-top:6px;border-top:1.5px solid #000;font-size:10px}
+.hqac{display:flex;gap:.6rem;justify-content:center;padding:.72rem;background:#111}
+.hqbtn{background:#1a3560;border:none;color:#f5c842;border-radius:6px;padding:.34rem .76rem;cursor:pointer;font-family:inherit;font-size:.72rem;font-weight:600;transition:background .15s;white-space:nowrap}
+.hqbtn:hover{background:#22406e}
 @media print{
   body.ps-open > *{visibility:hidden!important}
   body.ps-open .psov{visibility:visible!important;position:fixed!important;top:0!important;left:0!important;width:100%!important;overflow:visible!important;background:white!important;padding:0!important}
   body.ps-open .psw{visibility:visible!important;width:100%!important;max-height:none!important;overflow:visible!important}
   body.ps-open .psw *{visibility:visible!important}
   body.ps-open .psac{display:none!important}
+  body.hq-open > *{visibility:hidden!important}
+  body.hq-open .hqov{visibility:visible!important;position:fixed!important;top:0!important;left:0!important;width:100%!important;overflow:visible!important;background:white!important;padding:0!important}
+  body.hq-open .hqw{visibility:visible!important;width:100%!important;max-height:none!important;overflow:visible!important}
+  body.hq-open .hqw *{visibility:visible!important}
+  body.hq-open .hqac{display:none!important}
   @page{margin:10mm}
 }
 </style>
@@ -163,7 +195,7 @@ tr:hover td{background:rgba(201,168,76,.025)}
       <template v-else>
         <label class="ll">No. IC Pekerja</label>
         <input :class="['li',{err:!!loginErr}]" v-model="empIC" @keydown.enter="loginEmployee" placeholder="941203-08-6188">
-        <div style="color:#3a4e68;font-size:.66rem;margin-bottom:.3rem">Masukkan IC anda (dengan atau tanpa tanda -)</div>
+        <div style="color:#7090b8;font-size:.66rem;margin-bottom:.3rem">Masukkan IC anda (dengan atau tanpa tanda -)</div>
         <div v-if="loginErr" class="lerr">{{loginErr}}</div>
         <button class="bgld" @click="loginEmployee">Masuk →</button>
       </template>
@@ -171,14 +203,14 @@ tr:hover td{background:rgba(201,168,76,.025)}
   </div>
 
   <!-- EMPLOYEE SELF-SERVICE APP -->
-  <div v-else-if="mode==='employee' && empUser" style="min-height:100vh;background:#07101f">
+  <div v-else-if="mode==='employee' && empUser" style="min-height:100vh;background:#0f1f3d">
     <div class="emp-hdr">
       <div>
-        <div style="color:#c9a84c;font-weight:600;font-size:.9rem">{{empUser.name}}</div>
-        <div style="color:#3a4e68;font-size:.66rem">{{empUser.position}} · {{empUser.dept}} · IC: {{empUser.nric}}</div>
+        <div style="color:#f5c842;font-weight:600;font-size:.9rem">{{empUser.name}}</div>
+        <div style="color:#7090b8;font-size:.66rem">{{empUser.position}} · {{empUser.dept}} · IC: {{empUser.nric}}</div>
       </div>
       <div style="display:flex;gap:.75rem;align-items:center">
-        <span style="color:#3a4e68;font-size:.72rem">AWARA SDN BHD</span>
+        <span style="color:#7090b8;font-size:.72rem">AWARA SDN BHD</span>
         <button class="ni lo" style="width:auto;padding:.3rem .6rem;margin-top:0" @click="logout">Logout</button>
       </div>
     </div>
@@ -192,19 +224,19 @@ tr:hover td{background:rgba(201,168,76,.025)}
           <option v-for="(m,i) in MONTHS" :value="i+1">{{m}}</option>
         </select>
       </div>
-      <div v-if="!empCurrentPR" class="sc" style="text-align:center;color:#3a4e68;padding:2.5rem;border-radius:11px;font-size:.82rem">
+      <div v-if="!empCurrentPR" class="sc" style="text-align:center;color:#7090b8;padding:2.5rem;border-radius:11px;font-size:.82rem">
         Payroll untuk {{MONTHS[empMo-1]}} {{empYr}} belum dibuka oleh admin.<br>
         <span style="font-size:.74rem">Sila hubungi Wilson / admin.</span>
       </div>
       <div v-else class="emp-grid">
         <!-- Attendance Input -->
         <div class="sc">
-          <div style="color:#c9a84c;font-family:'Playfair Display',serif;margin-bottom:.9rem;font-size:1rem">Isi Kehadiran Saya</div>
+          <div style="color:#f5c842;font-family:'Playfair Display',serif;margin-bottom:.9rem;font-size:1rem">Isi Kehadiran Saya</div>
           <div style="display:flex;flex-direction:column;gap:.7rem">
             <div>
               <label class="fl">Hari Cuti Tanpa Gaji</label>
               <input class="fi" type="number" min="0" step="0.5" :value="empRaw.leaveDays||0" @change="empUpdateField('leaveDays',$event.target.value)">
-              <div style="color:#3a4e68;font-size:.62rem;margin-top:.2rem">0.5 = setengah hari</div>
+              <div style="color:#7090b8;font-size:.62rem;margin-top:.2rem">0.5 = setengah hari</div>
             </div>
             <div>
               <label class="fl">Hari MC (Cuti Sakit)</label>
@@ -214,36 +246,45 @@ tr:hover td{background:rgba(201,168,76,.025)}
               <label class="fl">Potongan Lewat (RM)</label>
               <input class="fi" type="number" min="0" step="0.01" :value="empRaw.lateAmt||0" @change="empUpdateField('lateAmt',$event.target.value)">
             </div>
-            <div style="background:#060f1c;border-radius:8px;padding:.65rem;margin-top:.3rem;font-size:.7rem;color:#3a4e68;line-height:1.6">
+            <div style="background:#111f38;border-radius:8px;padding:.65rem;margin-top:.3rem;font-size:.7rem;color:#7090b8;line-height:1.6">
               ℹ️ Tukar nilai → klik keluar → data auto-disimpan.<br>Commission / Allowance / Advance diisi oleh Admin.
             </div>
           </div>
         </div>
         <!-- Payslip Summary -->
         <div class="sc">
-          <div style="color:#c9a84c;font-family:'Playfair Display',serif;margin-bottom:.9rem;font-size:1rem">Ringkasan Gaji</div>
+          <div style="color:#f5c842;font-family:'Playfair Display',serif;margin-bottom:.9rem;font-size:1rem">Ringkasan Gaji</div>
           <div style="display:flex;flex-direction:column;gap:.5rem;font-size:.82rem">
             <div style="display:flex;justify-content:space-between">
-              <span style="color:#3a4e68">Gaji Asas</span><span>RM {{f2(empUser.basicSalary)}}</span>
+              <span style="color:#7090b8">Gaji Asas</span><span>RM {{f2(empUser.basicSalary)}}</span>
             </div>
-            <div v-if="(empRaw.commission||0)*1+(empRaw.allowance||0)*1>0" style="display:flex;justify-content:space-between">
-              <span style="color:#3a4e68">+ Commission / Elaun</span><span>RM {{f2((empRaw.commission||0)*1+(empRaw.allowance||0)*1)}}</span>
+            <div v-if="(empRaw.commEpf||0)*1+(empRaw.commNoEpf||0)*1>0" style="display:flex;justify-content:space-between">
+              <span style="color:#7090b8">+ Commission (EPF)</span><span v-if="(empRaw.commEpf||0)*1>0">RM {{f2((empRaw.commEpf||0)*1)}}</span>
             </div>
-            <hr style="border:none;border-top:1px solid #142440;margin:.15rem 0">
+            <div v-if="(empRaw.commNoEpf||0)*1>0" style="display:flex;justify-content:space-between">
+              <span style="color:#7090b8">+ Commission (No EPF)</span><span>RM {{f2((empRaw.commNoEpf||0)*1)}}</span>
+            </div>
+            <div v-if="(empRaw.perfBonus||0)*1>0" style="display:flex;justify-content:space-between">
+              <span style="color:#7090b8">+ Basic of Performance</span><span>RM {{f2((empRaw.perfBonus||0)*1)}}</span>
+            </div>
+            <div v-if="(empRaw.allowance||0)*1>0" style="display:flex;justify-content:space-between">
+              <span style="color:#7090b8">+ Elaun</span><span>RM {{f2((empRaw.allowance||0)*1)}}</span>
+            </div>
+            <hr style="border:none;border-top:1px solid #1e3660;margin:.15rem 0">
             <template v-if="!empUser.exempt">
-              <div style="display:flex;justify-content:space-between"><span style="color:#3a4e68">EPF (11%)</span><span style="color:#a84040">- RM {{f2(empCalc.epfE)}}</span></div>
-              <div style="display:flex;justify-content:space-between"><span style="color:#3a4e68">SOCSO</span><span style="color:#a84040">- RM {{f2(empCalc.socsoE)}}</span></div>
-              <div style="display:flex;justify-content:space-between"><span style="color:#3a4e68">EIS</span><span style="color:#a84040">- RM {{f2(empCalc.eisE)}}</span></div>
+              <div style="display:flex;justify-content:space-between"><span style="color:#7090b8">EPF (11%)</span><span style="color:#e05555">- RM {{f2(empCalc.epfE)}}</span></div>
+              <div style="display:flex;justify-content:space-between"><span style="color:#7090b8">SOCSO</span><span style="color:#e05555">- RM {{f2(empCalc.socsoE)}}</span></div>
+              <div style="display:flex;justify-content:space-between"><span style="color:#7090b8">EIS</span><span style="color:#e05555">- RM {{f2(empCalc.eisE)}}</span></div>
             </template>
-            <div v-if="empCalc.unpaid>0" style="display:flex;justify-content:space-between"><span style="color:#3a4e68">Cuti Tanpa Gaji</span><span style="color:#a84040">- RM {{f2(empCalc.unpaid)}}</span></div>
-            <div v-if="(empRaw.lateAmt||0)*1>0" style="display:flex;justify-content:space-between"><span style="color:#3a4e68">Potongan Lewat</span><span style="color:#a84040">- RM {{f2(empRaw.lateAmt)}}</span></div>
-            <div v-if="(empRaw.advance||0)*1>0" style="display:flex;justify-content:space-between"><span style="color:#3a4e68">Advance</span><span style="color:#a84040">- RM {{f2(empRaw.advance)}}</span></div>
-            <hr style="border:none;border-top:1px solid #142440;margin:.15rem 0">
+            <div v-if="empCalc.unpaid>0" style="display:flex;justify-content:space-between"><span style="color:#7090b8">Cuti Tanpa Gaji</span><span style="color:#e05555">- RM {{f2(empCalc.unpaid)}}</span></div>
+            <div v-if="(empRaw.lateAmt||0)*1>0" style="display:flex;justify-content:space-between"><span style="color:#7090b8">Potongan Lewat</span><span style="color:#e05555">- RM {{f2(empRaw.lateAmt)}}</span></div>
+            <div v-if="(empRaw.advance||0)*1>0" style="display:flex;justify-content:space-between"><span style="color:#7090b8">Advance</span><span style="color:#e05555">- RM {{f2(empRaw.advance)}}</span></div>
+            <hr style="border:none;border-top:1px solid #1e3660;margin:.15rem 0">
             <div style="display:flex;justify-content:space-between;font-weight:700;margin-top:.2rem">
-              <span style="color:#c9a84c;font-size:.9rem">NET PAY</span>
-              <span style="color:#2ea85e;font-size:1.25rem">RM {{f2(empCalc.net)}}</span>
+              <span style="color:#f5c842;font-size:.9rem">NET PAY</span>
+              <span style="color:#38d474;font-size:1.25rem">RM {{f2(empCalc.net)}}</span>
             </div>
-            <div v-if="!empUser.exempt" style="color:#3a4e68;font-size:.66rem;margin-top:.3rem">
+            <div v-if="!empUser.exempt" style="color:#7090b8;font-size:.66rem;margin-top:.3rem">
               Employer KWSP: RM {{f2(empCalc.epfR)}} · SOCSO: RM {{f2(empCalc.socsoR)}} · EIS: RM {{f2(empCalc.eisR)}}
             </div>
           </div>
@@ -253,7 +294,7 @@ tr:hover td{background:rgba(201,168,76,.025)}
         </div>
       </div>
     </div>
-    <div style="position:fixed;bottom:0;left:0;right:0;background:#060f1c;border-top:1px solid #142440;padding:.5rem 2rem;font-size:.66rem;color:#3a4e68;text-align:center">
+    <div style="position:fixed;bottom:0;left:0;right:0;background:#111f38;border-top:1px solid #1e3660;padding:.5rem 2rem;font-size:.66rem;color:#7090b8;text-align:center">
       AWARA SDN BHD · Data auto-disimpan · Untuk pertanyaan hubungi HR/Admin
     </div>
   </div>
@@ -286,17 +327,17 @@ tr:hover td{background:rgba(201,168,76,.025)}
             <option v-for="(m,i) in MONTHS" :value="i+1">{{m}}</option>
           </select>
           <template v-if="!currentPR">
-            <span style="color:#3a4e68;font-size:.72rem">Hari Kerja:</span>
+            <span style="color:#7090b8;font-size:.72rem">Hari Kerja:</span>
             <input class="cni" type="number" v-model.number="wdInput" min="1" max="31">
             <button class="bgld" style="width:auto;padding:.36rem .9rem;margin-top:0;font-size:.74rem" @click="initMonth">+ Buka Bulan Ini</button>
           </template>
           <template v-else>
-            <span style="color:#3a4e68;font-size:.72rem">Hari Kerja:</span>
+            <span style="color:#7090b8;font-size:.72rem">Hari Kerja:</span>
             <input class="cni" type="number" :value="currentPR.workingDays" @change="updateWD($event.target.value)" min="1" max="31">
-            <span style="color:#3a4e68;font-size:.68rem">EPF 11%/13% · SOCSO · EIS auto</span>
+            <span style="color:#7090b8;font-size:.68rem">EPF 11%/13% · SOCSO · EIS auto</span>
           </template>
         </div>
-        <div v-if="!currentPR" class="sc" style="text-align:center;color:#3a4e68;padding:3rem;border-radius:11px;font-size:.82rem">
+        <div v-if="!currentPR" class="sc" style="text-align:center;color:#7090b8;padding:3rem;border-radius:11px;font-size:.82rem">
           Tiada payroll untuk {{MONTHS[mo-1]}} {{yr}}.<br>
           <span style="font-size:.74rem">Set hari kerja dan klik "Buka Bulan Ini". Selepas dibuka, pekerja boleh login dan isi sendiri.</span>
         </div>
@@ -313,20 +354,22 @@ tr:hover td{background:rgba(201,168,76,.025)}
                 <tr>
                   <th>#</th><th>Nama</th><th>Gaji Asas</th>
                   <th>Cuti (hari)</th><th>MC</th><th>Lewat (RM)</th>
-                  <th>Commission</th><th>Elaun</th><th>Advance</th>
+                  <th>Comm (EPF)</th><th>Comm (No EPF)</th><th>Perf Bonus</th><th>Elaun</th><th>Advance</th>
                   <th>EPF</th><th>SOCSO</th><th>EIS</th>
-                  <th>Unpaid</th><th>Total Potong</th><th>Net Pay</th><th>Slip</th>
+                  <th>Unpaid</th><th>Total Potong</th><th>Net Pay</th><th>Slip / HQ</th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="(emp,idx) in activeEmps" :key="emp.id">
-                  <td style="color:#3a4e68">{{idx+1}}</td>
-                  <td><div class="te">{{emp.name}}</div><div class="te2">{{emp.position}}</div></td>
+                  <td style="color:#7090b8">{{idx+1}}</td>
+                  <td><div class="te">{{emp.name}}</div><div class="te2">{{emp.position}} <span v-if="!emp.confirmed" class="b bx" style="font-size:.56rem">Belum Confirm</span><span v-if="emp.hasUnpaid" class="b" style="font-size:.56rem;background:#1a2a4a;color:#7090b8">Unpaid</span></div></td>
                   <td class="tn">{{f2(emp.basicSalary)}}</td>
-                  <td><input class="ci" type="number" min="0" step="0.5" :value="getField(emp.id,'leaveDays')" @change="upField(emp.id,'leaveDays',$event.target.value)"></td>
+                  <td><input class="ci" type="number" min="0" step="0.5" :value="getField(emp.id,'leaveDays')" @change="upField(emp.id,'leaveDays',$event.target.value)" :disabled="emp.hasUnpaid===false" :title="emp.hasUnpaid===false?'Staff ini tiada unpaid leave':''"></td>
                   <td><input class="ci" type="number" min="0" :value="getField(emp.id,'mcDays')" @change="upField(emp.id,'mcDays',$event.target.value)"></td>
                   <td><input class="ci" type="number" min="0" step="0.01" :value="getField(emp.id,'lateAmt')" @change="upField(emp.id,'lateAmt',$event.target.value)"></td>
-                  <td><input class="ci" type="number" min="0" step="0.01" :value="getField(emp.id,'commission')" @change="upField(emp.id,'commission',$event.target.value)"></td>
+                  <td><input class="ci" type="number" min="0" step="0.01" :value="getField(emp.id,'commEpf')" @change="upField(emp.id,'commEpf',$event.target.value)" title="Commission yang masuk EPF"></td>
+                  <td><input class="ci" type="number" min="0" step="0.01" :value="getField(emp.id,'commNoEpf')" @change="upField(emp.id,'commNoEpf',$event.target.value)" title="Commission tanpa EPF"></td>
+                  <td><input class="ci" type="number" min="0" step="0.01" :value="getField(emp.id,'perfBonus')" @change="upField(emp.id,'perfBonus',$event.target.value)" title="Basic of Performance"></td>
                   <td><input class="ci" type="number" min="0" step="0.01" :value="getField(emp.id,'allowance')" @change="upField(emp.id,'allowance',$event.target.value)"></td>
                   <td><input class="ci" type="number" min="0" step="0.01" :value="getField(emp.id,'advance')" @change="upField(emp.id,'advance',$event.target.value)"></td>
                   <td class="tr">{{emp.exempt?'—':f2(calcRow(emp).epfE)}}</td>
@@ -335,12 +378,15 @@ tr:hover td{background:rgba(201,168,76,.025)}
                   <td class="tr">{{calcRow(emp).unpaid>0?f2(calcRow(emp).unpaid):'—'}}</td>
                   <td class="tr" style="font-weight:600">{{f2(calcRow(emp).totalDed)}}</td>
                   <td class="tg">RM {{f2(calcRow(emp).net)}}</td>
-                  <td><button class="bp" @click="openPrint(emp,calcRow(emp),activeYM)">🖨️</button></td>
+                  <td style="display:flex;gap:.18rem">
+                    <button class="bp" @click="openPrint(emp,calcRow(emp),activeYM)" title="Slip Pekerja">🖨️</button>
+                    <button class="hqbtn" style="padding:.22rem .44rem;font-size:.65rem;border-radius:4px" @click="openHQ(emp,calcRow(emp),activeYM)" title="HQ Format">📋 HQ</button>
+                  </td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr class="tfoot-row">
-                  <td colspan="14" style="text-align:right;color:#3a4e68;font-weight:700;font-size:.65rem">JUMLAH NET PAY →</td>
+                  <td colspan="14" style="text-align:right;color:#7090b8;font-weight:700;font-size:.65rem">JUMLAH NET PAY →</td>
                   <td class="tg" style="font-weight:700">RM {{f2(payrollTotals.net)}}</td>
                   <td></td>
                 </tr>
@@ -348,12 +394,12 @@ tr:hover td{background:rgba(201,168,76,.025)}
             </table>
           </div>
           <div class="er-box">
-            <div style="color:#3a4e68;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.45rem">Employer Contributions</div>
+            <div style="color:#7090b8;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.45rem">Employer Contributions</div>
             <div style="display:flex;gap:2rem;flex-wrap:wrap;font-size:.78rem">
-              <span>KWSP: <strong style="color:#c9a84c">RM {{f2(payrollTotals.epfEr)}}</strong></span>
-              <span>SOCSO: <strong style="color:#c9a84c">RM {{f2(payrollTotals.socsoEr)}}</strong></span>
-              <span>EIS: <strong style="color:#c9a84c">RM {{f2(payrollTotals.eisEr)}}</strong></span>
-              <span style="border-left:1px solid #142440;padding-left:2rem">Jumlah: <strong style="color:#2ea85e">RM {{f2(payrollTotals.epfEr+payrollTotals.socsoEr+payrollTotals.eisEr)}}</strong></span>
+              <span>KWSP: <strong style="color:#f5c842">RM {{f2(payrollTotals.epfEr)}}</strong></span>
+              <span>SOCSO: <strong style="color:#f5c842">RM {{f2(payrollTotals.socsoEr)}}</strong></span>
+              <span>EIS: <strong style="color:#f5c842">RM {{f2(payrollTotals.eisEr)}}</strong></span>
+              <span style="border-left:1px solid #1e3660;padding-left:2rem">Jumlah: <strong style="color:#38d474">RM {{f2(payrollTotals.epfEr+payrollTotals.socsoEr+payrollTotals.eisEr)}}</strong></span>
             </div>
           </div>
         </template>
@@ -363,7 +409,7 @@ tr:hover td{background:rgba(201,168,76,.025)}
       <div v-else-if="view==='employees'">
         <div class="pt">Employees</div>
         <div class="cr" style="justify-content:space-between;margin-bottom:1.1rem">
-          <span style="color:#3a4e68;font-size:.72rem">{{activeEmps.length}} aktif · {{emps.length}} jumlah</span>
+          <span style="color:#7090b8;font-size:.72rem">{{activeEmps.length}} aktif · {{emps.length}} jumlah</span>
           <div style="display:flex;gap:.5rem">
             <button class="bs" @click="showCSV=true">📂 Import CSV</button>
             <button class="bgld" style="width:auto;padding:.36rem .88rem;margin-top:0;font-size:.74rem" @click="openEmpModal(null)">+ Tambah</button>
@@ -382,17 +428,19 @@ tr:hover td{background:rgba(201,168,76,.025)}
                 <td colspan="10" class="empty-msg">Belum ada employee. Tambah manual atau Import CSV.</td>
               </tr>
               <tr v-for="(emp,i) in emps" :key="emp.id">
-                <td style="color:#3a4e68">{{i+1}}</td>
+                <td style="color:#7090b8">{{i+1}}</td>
                 <td>
                   <div class="te">{{emp.name}}</div>
                   <span v-if="emp.exempt" class="b bx" style="margin-top:2px;display:inline-block">No EPF</span>
+                  <span v-else-if="!emp.confirmed" class="b bx" style="margin-top:2px;display:inline-block">Belum Confirm</span>
+                  <span v-if="emp.hasUnpaid" class="b" style="margin-top:2px;display:inline-block;background:#1a2a4a;color:#7090b8">Unpaid</span>
                 </td>
-                <td style="color:#c9a84c;font-size:.7rem;font-family:monospace">{{emp.nric}}</td>
+                <td style="color:#f5c842;font-size:.7rem;font-family:monospace">{{emp.nric}}</td>
                 <td style="color:#7a8a9a">{{emp.dept}}</td>
                 <td>{{emp.position}}</td>
                 <td class="tn">RM {{f2(emp.basicSalary)}}</td>
-                <td style="color:#3a4e68;font-size:.7rem">{{emp.bank}}</td>
-                <td style="color:#3a4e68;font-size:.7rem">{{emp.joinDate}}</td>
+                <td style="color:#7090b8;font-size:.7rem">{{emp.bank}}</td>
+                <td style="color:#7090b8;font-size:.7rem">{{emp.joinDate}}</td>
                 <td><span :class="['b',emp.isActive!==false?'ba':'bi']">{{emp.isActive!==false?'Aktif':'Tidak Aktif'}}</span></td>
                 <td style="display:flex;gap:.18rem">
                   <button class="ibtn" @click="openEmpModal(emp)" title="Edit">✏️</button>
@@ -408,14 +456,14 @@ tr:hover td{background:rgba(201,168,76,.025)}
       <!-- ====== REPORTS VIEW ====== -->
       <div v-else-if="view==='reports'">
         <div class="pt">Reports <span class="pts">Monthly Summary</span></div>
-        <div v-if="!Object.keys(prls).length" class="sc" style="text-align:center;color:#3a4e68;padding:3rem;border-radius:11px">Belum ada data payroll.</div>
+        <div v-if="!Object.keys(prls).length" class="sc" style="text-align:center;color:#7090b8;padding:3rem;border-radius:11px">Belum ada data payroll.</div>
         <template v-else>
           <div class="cr">
             <select class="cs" v-model="rptYM">
               <option v-for="ym in sortedPRLKeys" :value="ym">{{rptLabel(ym)}}</option>
             </select>
             <button class="bs" @click="printReport">🖨️ Print</button>
-            <span style="color:#3a4e68;font-size:.7rem">{{rptLabel(rptYM)}} · {{prls[rptYM]?prls[rptYM].workingDays:0}} hari kerja</span>
+            <span style="color:#7090b8;font-size:.7rem">{{rptLabel(rptYM)}} · {{prls[rptYM]?prls[rptYM].workingDays:0}} hari kerja</span>
           </div>
           <div class="sg">
             <div class="sc"><div class="sv">RM {{f2(rptTotals.gross)}}</div><div class="sl">Total Gross</div></div>
@@ -428,11 +476,11 @@ tr:hover td{background:rgba(201,168,76,.025)}
           <div class="tw">
             <table>
               <thead>
-                <tr><th>#</th><th>Staff</th><th>Gaji</th><th>Cuti</th><th>MC</th><th>EPF</th><th>SOCSO</th><th>EIS</th><th>Unpaid</th><th>Lewat</th><th>Advance</th><th>Comm.</th><th>Elaun</th><th>Total Potong</th><th>Net Pay</th></tr>
+                <tr><th>#</th><th>Staff</th><th>Gaji</th><th>Cuti</th><th>MC</th><th>EPF</th><th>SOCSO</th><th>EIS</th><th>Unpaid</th><th>Lewat</th><th>Advance</th><th>Comm(EPF)</th><th>Comm(No EPF)</th><th>Perf</th><th>Elaun</th><th>Total Potong</th><th>Net Pay</th></tr>
               </thead>
               <tbody>
                 <tr v-for="(row,i) in rptRows" :key="row.emp.id">
-                  <td style="color:#3a4e68">{{i+1}}</td>
+                  <td style="color:#7090b8">{{i+1}}</td>
                   <td><div class="te">{{row.emp.name}}</div><div class="te2">{{row.emp.dept}}</div></td>
                   <td class="tn">{{f2(row.emp.basicSalary)}}</td>
                   <td class="tn">{{row.raw.leaveDays||0}}</td>
@@ -443,7 +491,9 @@ tr:hover td{background:rgba(201,168,76,.025)}
                   <td class="tr">{{row.c.unpaid>0?f2(row.c.unpaid):'—'}}</td>
                   <td class="tr">{{row.raw.lateAmt*1>0?f2(row.raw.lateAmt):'—'}}</td>
                   <td class="tr">{{row.raw.advance*1>0?f2(row.raw.advance):'—'}}</td>
-                  <td class="tn">{{row.raw.commission*1>0?f2(row.raw.commission):'—'}}</td>
+                  <td class="tn">{{row.raw.commEpf*1>0?f2(row.raw.commEpf):'—'}}</td>
+                  <td class="tn">{{row.raw.commNoEpf*1>0?f2(row.raw.commNoEpf):'—'}}</td>
+                  <td class="tn">{{row.raw.perfBonus*1>0?f2(row.raw.perfBonus):'—'}}</td>
                   <td class="tn">{{row.raw.allowance*1>0?f2(row.raw.allowance):'—'}}</td>
                   <td class="tr" style="font-weight:600">{{f2(row.c.totalDed)}}</td>
                   <td class="tg">RM {{f2(row.c.net)}}</td>
@@ -451,7 +501,7 @@ tr:hover td{background:rgba(201,168,76,.025)}
               </tbody>
               <tfoot>
                 <tr class="tfoot-row">
-                  <td colspan="13" style="text-align:right;color:#3a4e68;font-weight:700;font-size:.65rem">JUMLAH →</td>
+                  <td colspan="15" style="text-align:right;color:#7090b8;font-weight:700;font-size:.65rem">JUMLAH →</td>
                   <td class="tr" style="font-weight:700">RM {{f2(rptTotals.ded)}}</td>
                   <td class="tg" style="font-weight:700">RM {{f2(rptTotals.net)}}</td>
                 </tr>
@@ -511,7 +561,7 @@ tr:hover td{background:rgba(201,168,76,.025)}
         </table>
         <div class="pssec">★ FOR COMPANY USE ONLY ★</div>
         <table class="psmn" style="margin-top:1px">
-          <tr><td style="width:34%;font-weight:bold">BASIC OF PERFORMANCE</td><td style="width:16%"></td><td style="width:34%">EPF (EMPLOYER)</td><td class="r" style="width:16%">{{printInfo.c.epfR>0?f2(printInfo.c.epfR):'—'}}</td></tr>
+          <tr><td style="width:34%;font-weight:bold">BASIC OF PERFORMANCE</td><td style="width:16%" class="r">{{(printInfo.c.perfBonus||0)*1>0?f2(printInfo.c.perfBonus):''}}</td><td style="width:34%">EPF (EMPLOYER)</td><td class="r" style="width:16%">{{printInfo.c.epfR>0?f2(printInfo.c.epfR):'—'}}</td></tr>
           <tr><td style="font-weight:bold">COLLECTION</td><td></td><td>SOCSO (EMPLOYER)</td><td class="r">{{printInfo.c.socsoR>0?f2(printInfo.c.socsoR):'—'}}</td></tr>
           <tr><td style="font-weight:bold">SUBMISSION</td><td></td><td>EIS (EMPLOYER)</td><td class="r">{{printInfo.c.eisR>0?f2(printInfo.c.eisR):'—'}}</td></tr>
           <tr><td style="font-weight:bold">TOTAL SUBMISSION LOAN</td><td></td><td style="font-weight:bold">TOTAL CONTRIBUTIONS</td><td class="r bb">{{f2(printInfo.c.epfR+printInfo.c.socsoR+printInfo.c.eisR)}}</td></tr>
@@ -536,6 +586,145 @@ tr:hover td{background:rgba(201,168,76,.025)}
     </div>
   </div>
 
+  <!-- HQ FORMAT MODAL -->
+  <div v-if="hqInfo" class="hqov" @click.self="hqInfo=null">
+    <div class="hqw">
+      <div class="hqi">
+        <div class="hqco">AWARA SDN BHD</div>
+        <table class="hqinfo">
+          <tr>
+            <td style="width:12%"><b>NAME :</b></td>
+            <td style="width:40%"><u><b>{{hqInfo.emp.name}}</b></u></td>
+            <td style="width:15%"><b>IC NUMBER :</b></td>
+            <td><u><b>{{hqInfo.emp.nric}}</b></u></td>
+          </tr>
+          <tr>
+            <td><b>BANK :</b></td>
+            <td><u><b>{{hqInfo.emp.bank}}</b></u></td>
+            <td><b>ACC NUMBER :</b></td>
+            <td><u><b>{{hqInfo.emp.accountNo}}</b></u></td>
+          </tr>
+        </table>
+        <hr style="border:none;border-top:2px solid #000;margin:5px 0">
+        <table class="hqmain">
+          <thead>
+            <tr>
+              <th style="width:35%">EARNING</th>
+              <th style="width:15%">AMOUNT</th>
+              <th style="width:35%">DEDUCTION</th>
+              <th style="width:15%">AMOUNT</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>BASIC</td>
+              <td class="hqr">RM {{f2(hqInfo.emp.basicSalary)}}</td>
+              <td>KWSP</td>
+              <td class="hqr">{{hqInfo.c.epfE>0?'RM '+f2(hqInfo.c.epfE):'RM'}}</td>
+            </tr>
+            <tr>
+              <td>{{(hqInfo.c.commEpf||0)*1>0?'COMMISSION (EPF)':((hqInfo.c.commNoEpf||0)*1>0?'COMMISSION (NO EPF)':'')}}</td>
+              <td class="hqr">{{((hqInfo.c.commEpf||0)*1+(hqInfo.c.commNoEpf||0)*1)>0?'RM '+f2((hqInfo.c.commEpf||0)*1+(hqInfo.c.commNoEpf||0)*1):'RM'}}</td>
+              <td>SOCSO</td>
+              <td class="hqr">{{hqInfo.c.socsoE>0?'RM '+f2(hqInfo.c.socsoE):'RM'}}</td>
+            </tr>
+            <tr>
+              <td></td><td class="hqr">RM</td>
+              <td>EIS</td>
+              <td class="hqr">{{hqInfo.c.eisE>0?'RM '+f2(hqInfo.c.eisE):'RM'}}</td>
+            </tr>
+            <tr>
+              <td></td><td class="hqr">RM</td>
+              <td>ADVANCE</td>
+              <td class="hqr">{{(hqInfo.c.advance||0)*1>0?'RM '+f2(hqInfo.c.advance):'RM'}}</td>
+            </tr>
+            <tr>
+              <td></td><td class="hqr">RM</td>
+              <td>LATE ( MINUTE )</td>
+              <td class="hqr">{{(hqInfo.c.lateAmt||0)*1>0?'RM '+f2(hqInfo.c.lateAmt):'RM'}}</td>
+            </tr>
+            <tr>
+              <td></td><td class="hqr">RM</td>
+              <td>UNPAID LEAVE</td>
+              <td class="hqr">{{hqInfo.c.unpaid>0?'RM '+f2(hqInfo.c.unpaid):'RM'}}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr style="background:#f0f0f0">
+              <td class="hqb">TOTAL</td>
+              <td class="hqr hqb">RM {{f2(hqInfo.c.gross)}}</td>
+              <td class="hqb">TOTAL</td>
+              <td class="hqr hqb">RM {{f2(hqInfo.c.totalDed)}}</td>
+            </tr>
+          </tfoot>
+        </table>
+        <div style="font-size:9px;font-weight:bold;letter-spacing:1px;margin:5px 0 2px;border-top:1px solid #000;padding-top:3px">FOR COMPANY USE ONLY*</div>
+        <table class="hqsec">
+          <thead>
+            <tr>
+              <th style="width:28%;text-align:left;background:#fff"> </th>
+              <th style="width:22%;text-align:left;background:#fff"> </th>
+              <th style="width:25%">Uo To Month</th>
+              <th style="width:25%">Balance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="hqb">PAYSLIP</td>
+              <td>{{hqInfo.payslipNo||''}}</td>
+              <td>ANNUAL LEAVE</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="hqb">KPI</td>
+              <td>{{(hqInfo.c.perfBonus||0)*1>0?f2(hqInfo.c.perfBonus):''}}</td>
+              <td>UNPAID LEAVE</td>
+              <td class="hqr">{{hqInfo.c.leaveDays>0?hqInfo.c.leaveDays:''}}</td>
+            </tr>
+            <tr>
+              <td class="hqb">KFI</td>
+              <td></td>
+              <td>KWSP</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="hqb">TOTAL SUBMISSION LOAN</td>
+              <td>{{hqInfo.totalLoan?'RM '+f2(hqInfo.totalLoan):'RM'}}</td>
+              <td>SOCSO</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td><td></td>
+              <td>EIS</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <table style="width:100%;border-collapse:collapse;margin-top:6px;border-top:2px solid #000">
+          <tr>
+            <td style="width:33%;padding:4px 0;font-weight:bold;font-size:12px"><u>Total Earning</u><br>RM {{f2(hqInfo.c.gross)}}</td>
+            <td style="width:34%;padding:4px 0;font-weight:bold;font-size:12px;text-align:center"><u>Total Deduction</u><br>RM {{f2(hqInfo.c.totalDed)}}</td>
+            <td style="width:33%;padding:4px 0;font-weight:bold;font-size:12px;text-align:right"><u>NETT</u><br>RM {{f2(hqInfo.c.net)}}</td>
+          </tr>
+        </table>
+        <div class="hqsgn">
+          <div>
+            <div>APPROVED BY : <b><u>{{hqApprover}}</u></b></div>
+            <div style="margin-top:5px">DATE : <b><u>{{hqDateStr}}</u></b></div>
+          </div>
+          <div style="text-align:right">
+            <div>RECEIVED BY : _______________________</div>
+            <div style="margin-top:5px">DATE : _______________________</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hqac">
+      <button class="bgld" style="width:auto;padding:.4rem 1rem;margin-top:0;font-size:.76rem" @click="doHQPrint">🖨️ Print / Save PDF (HQ)</button>
+      <button class="bo" style="background:#1a1a1a;border:1px solid #333;color:#888;padding:.4rem .85rem" @click="hqInfo=null">✕ Tutup</button>
+    </div>
+  </div>
+
   <!-- EMPLOYEE FORM MODAL -->
   <div v-if="empModalOpen" class="mbg" @click.self="empModalOpen=false">
     <div class="mb">
@@ -551,7 +740,7 @@ tr:hover td{background:rgba(201,168,76,.025)}
         <div><label class="fl">Tarikh Masuk</label><input class="fi" type="date" v-model="empForm.joinDate"></div>
         <div><label class="fl">Tarikh Berhenti</label><input class="fi" type="date" v-model="empForm.resignDate"></div>
         <div class="fg1"><label class="fl">Alamat</label><input class="fi" v-model="empForm.address" placeholder="No 12 Jalan ABC, Kuala Lumpur"></div>
-        <div style="border-top:1px solid #142440;padding-top:.6rem;grid-column:1/-1;font-size:.7rem;color:#3a4e68;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Maklumat Kecemasan</div>
+        <div style="border-top:1px solid #1e3660;padding-top:.6rem;grid-column:1/-1;font-size:.7rem;color:#7090b8;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Maklumat Kecemasan</div>
         <div><label class="fl">Nama</label><input class="fi" v-model="empForm.emergencyName" placeholder="Ahmad bin Johari"></div>
         <div><label class="fl">No. Telefon</label><input class="fi" v-model="empForm.emergencyPhone" placeholder="0123456789"></div>
         <div><label class="fl">Hubungan</label><input class="fi" v-model="empForm.emergencyRelation" placeholder="Bapa / Suami"></div>
@@ -559,6 +748,14 @@ tr:hover td{background:rgba(201,168,76,.025)}
           <label class="cbr">
             <input type="checkbox" v-model="empForm.exempt">
             Exempt EPF / SOCSO / EIS (Director / Pekerja Asing / Umur 75+)
+          </label>
+          <label class="cbr" style="margin-top:.5rem">
+            <input type="checkbox" v-model="empForm.confirmed">
+            Staff Confirmed (ada EPF / SOCSO / EIS)
+          </label>
+          <label class="cbr" style="margin-top:.5rem">
+            <input type="checkbox" v-model="empForm.hasUnpaid">
+            Boleh ada Cuti Tanpa Gaji (Unpaid Leave)
           </label>
         </div>
       </div>
@@ -576,29 +773,29 @@ tr:hover td{background:rgba(201,168,76,.025)}
       <template v-if="!csvPreview">
         <div style="margin-bottom:1rem">
           <button class="bs" @click="dlTemplate">📥 Download CSV Template</button>
-          <span style="color:#3a4e68;font-size:.7rem;margin-left:.75rem">Isi template lalu upload balik</span>
+          <span style="color:#7090b8;font-size:.7rem;margin-left:.75rem">Isi template lalu upload balik</span>
         </div>
         <label class="csv-drop">
           <input type="file" accept=".csv,.txt" style="display:none" @change="readCSV">
           <div style="font-size:2rem;margin-bottom:.5rem">📂</div>
-          <div style="color:#c9a84c;font-weight:600;font-size:.88rem">Klik untuk pilih fail CSV</div>
-          <div style="color:#3a4e68;font-size:.72rem;margin-top:.3rem">Format: .csv</div>
+          <div style="color:#f5c842;font-weight:600;font-size:.88rem">Klik untuk pilih fail CSV</div>
+          <div style="color:#7090b8;font-size:.72rem;margin-top:.3rem">Format: .csv</div>
         </label>
         <div v-if="csvErr" class="lerr" style="margin-top:.5rem">{{csvErr}}</div>
       </template>
       <template v-else>
-        <div style="color:#2ea85e;font-size:.78rem;margin-bottom:.75rem">✅ {{csvPreview.length}} rekod dijumpai. Preview (3 pertama):</div>
-        <div style="overflow-x:auto;max-height:200px;border:1px solid #142440;border-radius:8px;margin-bottom:1rem">
+        <div style="color:#38d474;font-size:.78rem;margin-bottom:.75rem">✅ {{csvPreview.length}} rekod dijumpai. Preview (3 pertama):</div>
+        <div style="overflow-x:auto;max-height:200px;border:1px solid #1e3660;border-radius:8px;margin-bottom:1rem">
           <table style="min-width:unset">
             <thead><tr><th v-for="(v,k) in csvPreview[0]" :key="k" v-if="['name','nric','salary','position','bank'].includes(k)">{{k}}</th></tr></thead>
             <tbody>
               <tr v-for="(row,i) in csvPreview.slice(0,3)" :key="i">
-                <td v-for="k in ['name','nric','salary','position','bank']" :key="k" style="color:#c5d0e0;max-width:130px;overflow:hidden;text-overflow:ellipsis">{{row[k]}}</td>
+                <td v-for="k in ['name','nric','salary','position','bank']" :key="k" style="color:#dce8f8;max-width:130px;overflow:hidden;text-overflow:ellipsis">{{row[k]}}</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div style="color:#3a4e68;font-size:.72rem;margin-bottom:1rem">Kolum yang disokong: Name, IC, Address, Date Joined, Date Resigned, Salary, Position, Department, Bank, Account No, Emergency Name/Phone/Relation</div>
+        <div style="color:#7090b8;font-size:.72rem;margin-bottom:1rem">Kolum yang disokong: Name, IC, Address, Date Joined, Date Resigned, Salary, Position, Department, Bank, Account No, Emergency Name/Phone/Relation</div>
       </template>
       <div class="fa">
         <button class="bo" @click="csvPreview=null;csvErr='';if(!csvPreview)showCSV=false">{{csvPreview?'Balik':'Batal'}}</button>
@@ -622,12 +819,25 @@ function calEPF(w){if(!w||w<=0)return{e:0,r:0};return{e:Math.round(w*0.11),r:w<=
 function calSOCSO(w){if(!w||w<=0)return{e:0,r:0};const c=Math.min(w,5000),bl=c%50===0?Math.max(0,c-50):Math.floor(c/50)*50;return{e:R2(Math.floor(bl*0.005*100)/100),r:R2(Math.floor(bl*0.0175/0.05)*0.05)};}
 function calEIS(w){if(!w||w<=0)return{e:0,r:0};const c=Math.min(w,4000),bl=c%50===0?Math.max(0,c-50):Math.floor(c/50)*50;const a=R2(Math.floor(bl*0.002*100)/100);return{e:a,r:a};}
 function compute(emp,raw={},wd=22){
-  const b=+(emp.basicSalary||0),cm=+(raw.commission||0),al=+(raw.allowance||0),gross=b+cm+al;
-  const ex=!!emp.exempt,ep=ex?{e:0,r:0}:calEPF(b),so=ex?{e:0,r:0}:calSOCSO(b),ei=ex?{e:0,r:0}:calEIS(b);
-  const lv=+(raw.leaveDays||0),unp=wd>0&&lv>0?R2((lv/wd)*b):0;
+  const b=+(emp.basicSalary||0);
+  const commEpf=+(raw.commEpf||0);      // commission yang dikira EPF
+  const commNoEpf=+(raw.commNoEpf||0);  // commission tanpa EPF
+  const perf=+(raw.perfBonus||0);       // basic of performance
+  const al=+(raw.allowance||0);
+  // EPF base = basic + EPF-able commission + perf bonus
+  const epfBase = b + commEpf + perf;
+  const gross = b + commEpf + commNoEpf + perf + al;
+  // Exempt: no EPF/SOCSO/EIS if exempt OR not yet confirmed
+  const ex = !!emp.exempt || !emp.confirmed;
+  const ep=ex?{e:0,r:0}:calEPF(epfBase);
+  const so=ex?{e:0,r:0}:calSOCSO(b);
+  const ei=ex?{e:0,r:0}:calEIS(b);
+  // Unpaid leave: only deduct if emp.hasUnpaid is true
+  const lv=+(raw.leaveDays||0);
+  const unp=(emp.hasUnpaid!==false)&&wd>0&&lv>0?R2((lv/wd)*b):0;
   const late=+(raw.lateAmt||0),adv=+(raw.advance||0);
   const ded=R2(ep.e+so.e+ei.e+unp+late+adv);
-  return{...raw,gross,epfE:ep.e,epfR:ep.r,socsoE:so.e,socsoR:so.r,eisE:ei.e,eisR:ei.r,unpaid:unp,totalDed:ded,net:R2(gross-ded)};
+  return{...raw,gross,epfBase,epfE:ep.e,epfR:ep.r,socsoE:so.e,socsoR:so.r,eisE:ei.e,eisR:ei.r,unpaid:unp,leaveDays:lv,mcDays:+(raw.mcDays||0),totalDed:ded,net:R2(gross-ded)};
 }
 function parseCSV(text){
   const lines=text.replace(/\r\n/g,'\n').replace(/\r/g,'\n').trim().split('\n');
@@ -693,6 +903,7 @@ createApp({
 
     // Payslip
     const printInfo = ref(null);
+    const hqInfo = ref(null);
 
     // Reports
     const rptYM = ref('');
@@ -753,7 +964,7 @@ createApp({
       if(!activeEmps.value.length){alert('Tambah employee dulu!');return;}
       if(currentPR.value){notify('Bulan ini dah ada payroll!');return;}
       const entries={};
-      activeEmps.value.forEach(e=>{entries[e.id]={commission:0,allowance:0,leaveDays:0,mcDays:0,lateAmt:0,advance:0};});
+      activeEmps.value.forEach(e=>{entries[e.id]={commEpf:0,commNoEpf:0,perfBonus:0,allowance:0,leaveDays:0,mcDays:0,lateAmt:0,advance:0};});
       prls.value[activeYM.value]={ym:activeYM.value,workingDays:wdInput.value||22,entries};
       savePrls(); notify('✅ Payroll '+MONTHS[mo.value-1]+' '+yr.value+' sudah dibuka!');
     };
@@ -773,7 +984,7 @@ createApp({
     // ── EMPLOYEES ──
     const openEmpModal = emp => {
       if(emp){ empForm.value={...emp}; }
-      else { empForm.value={name:'',nric:'',address:'',bank:'',accountNo:'',dept:'',position:'',basicSalary:1700,joinDate:'',resignDate:'',emergencyName:'',emergencyPhone:'',emergencyRelation:'',exempt:false}; }
+      else { empForm.value={name:'',nric:'',address:'',bank:'',accountNo:'',dept:'',position:'',basicSalary:1700,joinDate:'',resignDate:'',emergencyName:'',emergencyPhone:'',emergencyRelation:'',exempt:false,confirmed:false,hasUnpaid:false}; }
       empModalOpen.value=true;
     };
     const saveEmp = () => {
@@ -825,6 +1036,21 @@ createApp({
     // ── PAYSLIP ──
     const openPrint = (emp,c,ym) => { printInfo.value={emp,c,ym}; };
     const doPrint = () => { document.body.classList.add('ps-open'); window.print(); setTimeout(()=>document.body.classList.remove('ps-open'),800); };
+
+    // ── HQ FORMAT ──
+    const hqApprover = ref('WILSON');
+    const hqDateStr = computed(()=>{
+      if(!hqInfo.value) return '';
+      const [y,m]=hqInfo.value.ym.split('-').map(Number);
+      return '01.'+String(m).padStart(2,'0')+'.'+y;
+    });
+    const openHQ = (emp,c,ym) => {
+      // auto payslip number: count how many months this emp has been paid
+      const empPrls = Object.keys(prls.value).sort();
+      const psNo = empPrls.indexOf(ym)+1;
+      hqInfo.value={emp,c,ym,payslipNo:psNo>0?psNo:'',totalLoan:0};
+    };
+    const doHQPrint = () => { document.body.classList.add('hq-open'); window.print(); setTimeout(()=>document.body.classList.remove('hq-open'),800); };
     const printMonthStr = computed(()=>{
       if(!printInfo.value) return '';
       const [y,m]=printInfo.value.ym.split('-').map(Number);
@@ -833,8 +1059,15 @@ createApp({
     const psRows = computed(()=>{
       if(!printInfo.value) return [];
       const c=printInfo.value.c;
-      const b=+(printInfo.value.emp.basicSalary||0),cm=+(c.commission||0),al=+(c.allowance||0);
-      const earn=[{el:'BASIC SALARY',ea:b},{el:cm>0?'COMMISSION':'',ea:cm>0?cm:null},{el:al>0?'ALLOWANCE (ELAUN)':'',ea:al>0?al:null},{el:'',ea:null},{el:'',ea:null},{el:'',ea:null}];
+      const b=+(printInfo.value.emp.basicSalary||0),commEpf=+(c.commEpf||0),commNoEpf=+(c.commNoEpf||0),perf=+(c.perfBonus||0),al=+(c.allowance||0);
+      const earn=[
+        {el:'BASIC SALARY',ea:b},
+        {el:commEpf>0?'COMMISSION (EPF)':'',ea:commEpf>0?commEpf:null},
+        {el:commNoEpf>0?'COMMISSION (NON-EPF)':'',ea:commNoEpf>0?commNoEpf:null},
+        {el:perf>0?'BASIC OF PERFORMANCE':'',ea:perf>0?perf:null},
+        {el:al>0?'ALLOWANCE (ELAUN)':'',ea:al>0?al:null},
+        {el:'',ea:null},
+      ];
       const ded=[{dl:'EPF (KWSP)',da:c.epfE>0?c.epfE:null},{dl:'SOCSO',da:c.socsoE>0?c.socsoE:null},{dl:'EIS',da:c.eisE>0?c.eisE:null},{dl:'UNPAID LEAVE',da:c.unpaid>0?c.unpaid:null},{dl:'ADVANCE',da:(c.advance||0)*1>0?c.advance:null},{dl:'LATE',da:(c.lateAmt||0)*1>0?c.lateAmt:null}];
       return earn.map((e,i)=>({...e,...(ded[i]||{dl:'',da:null})}));
     });
@@ -877,6 +1110,7 @@ createApp({
       getField,calcRow,payrollTotals,
       empModalOpen,empForm,showCSV,csvPreview,csvErr,
       printInfo,printMonthStr,psRows,
+      hqInfo,hqApprover,hqDateStr,
       rptYM,sortedPRLKeys,rptRows,rptTotals,
       empYr,empMo,empYM,empCurrentPR,empRaw,empCalc,
       f2,
@@ -884,7 +1118,7 @@ createApp({
       initMonth,upField,updateWD,
       openEmpModal,saveEmp,deactivate,reactivate,
       dlTemplate,readCSV,doImportCSV,
-      openPrint,doPrint,rptLabel,printReport,
+      openPrint,doPrint,openHQ,doHQPrint,rptLabel,printReport,
       empUpdateField,
     };
   }
