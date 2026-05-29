@@ -157,17 +157,16 @@ tr:hover td{background:rgba(201,168,76,.025)}
 .hqbtn{background:#1a3560;border:none;color:#f5c842;border-radius:6px;padding:.34rem .76rem;cursor:pointer;font-family:inherit;font-size:.72rem;font-weight:600;transition:background .15s;white-space:nowrap}
 .hqbtn:hover{background:#22406e}
 @media print{
-  body.ps-open > *{visibility:hidden!important}
-  body.ps-open .psov{visibility:visible!important;position:fixed!important;top:0!important;left:0!important;width:100%!important;overflow:visible!important;background:white!important;padding:0!important}
-  body.ps-open .psw{visibility:visible!important;width:100%!important;max-height:none!important;overflow:visible!important}
-  body.ps-open .psw *{visibility:visible!important}
+  body > *{display:none!important}
+  body.ps-open .psov{display:flex!important;position:fixed!important;inset:0!important;background:white!important;padding:0!important;z-index:9999!important}
+  body.ps-open .psw{display:block!important;width:100%!important;margin:0!important}
+  body.ps-open .psw *{display:revert!important}
   body.ps-open .psac{display:none!important}
-  body.hq-open > *{visibility:hidden!important}
-  body.hq-open .hqov{visibility:visible!important;position:fixed!important;top:0!important;left:0!important;width:100%!important;overflow:visible!important;background:white!important;padding:0!important}
-  body.hq-open .hqw{visibility:visible!important;width:100%!important;max-height:none!important;overflow:visible!important}
-  body.hq-open .hqw *{visibility:visible!important}
+  body.hq-open .hqov{display:flex!important;position:fixed!important;inset:0!important;background:white!important;padding:0!important;z-index:9999!important}
+  body.hq-open .hqw{display:block!important;width:100%!important;margin:0!important}
+  body.hq-open .hqw *{display:revert!important}
   body.hq-open .hqac{display:none!important}
-  @page{margin:10mm}
+  @page{margin:10mm;size:A4}
 }
 </style>
 </head>
@@ -353,8 +352,8 @@ tr:hover td{background:rgba(201,168,76,.025)}
               <thead>
                 <tr>
                   <th>#</th><th>Nama</th><th>Gaji Asas</th>
-                  <th>Cuti (hari)</th><th>MC</th><th>Lewat (RM)</th>
-                  <th>Comm (EPF)</th><th>Comm (No EPF)</th><th>Perf Bonus</th><th>Elaun</th><th>Advance</th>
+                  <th>Cuti</th><th>MC</th><th>Lewat (RM)</th>
+                  <th>KPI</th><th>KFI</th><th>Incentive</th><th>Basic Perf.</th><th>Submission Loan</th><th>Advance</th>
                   <th>EPF</th><th>SOCSO</th><th>EIS</th>
                   <th>Unpaid</th><th>Total Potong</th><th>Net Pay</th><th>Slip / HQ</th>
                 </tr>
@@ -362,19 +361,20 @@ tr:hover td{background:rgba(201,168,76,.025)}
               <tbody>
                 <tr v-for="(emp,idx) in activeEmps" :key="emp.id">
                   <td style="color:#7090b8">{{idx+1}}</td>
-                  <td><div class="te">{{emp.name}}</div><div class="te2">{{emp.position}} <span v-if="!emp.confirmed" class="b bx" style="font-size:.56rem">Belum Confirm</span><span v-if="emp.hasUnpaid" class="b" style="font-size:.56rem;background:#1a2a4a;color:#7090b8">Unpaid</span></div></td>
+                  <td><div class="te">{{emp.name}}</div><div class="te2">{{emp.position}} <span v-if="!emp.hasEpf" class="b bx" style="font-size:.56rem">No EPF</span><span v-if="emp.isConfirmed" class="b ba" style="font-size:.56rem">Confirmed</span></div></td>
                   <td class="tn">{{f2(emp.basicSalary)}}</td>
-                  <td><input class="ci" type="number" min="0" step="0.5" :value="getField(emp.id,'leaveDays')" @change="upField(emp.id,'leaveDays',$event.target.value)" :disabled="emp.hasUnpaid===false" :title="emp.hasUnpaid===false?'Staff ini tiada unpaid leave':''"></td>
+                  <td><input class="ci" type="number" min="0" step="0.5" :value="getField(emp.id,'leaveDays')" @change="upField(emp.id,'leaveDays',$event.target.value)" :style="!emp.unpaidLeave?'opacity:.35':''"></td>
                   <td><input class="ci" type="number" min="0" :value="getField(emp.id,'mcDays')" @change="upField(emp.id,'mcDays',$event.target.value)"></td>
                   <td><input class="ci" type="number" min="0" step="0.01" :value="getField(emp.id,'lateAmt')" @change="upField(emp.id,'lateAmt',$event.target.value)"></td>
-                  <td><input class="ci" type="number" min="0" step="0.01" :value="getField(emp.id,'commEpf')" @change="upField(emp.id,'commEpf',$event.target.value)" title="Commission yang masuk EPF"></td>
-                  <td><input class="ci" type="number" min="0" step="0.01" :value="getField(emp.id,'commNoEpf')" @change="upField(emp.id,'commNoEpf',$event.target.value)" title="Commission tanpa EPF"></td>
-                  <td><input class="ci" type="number" min="0" step="0.01" :value="getField(emp.id,'perfBonus')" @change="upField(emp.id,'perfBonus',$event.target.value)" title="Basic of Performance"></td>
-                  <td><input class="ci" type="number" min="0" step="0.01" :value="getField(emp.id,'allowance')" @change="upField(emp.id,'allowance',$event.target.value)"></td>
+                  <td><input class="ci" type="number" min="0" step="0.01" :value="getField(emp.id,'kpi')" @change="upField(emp.id,'kpi',$event.target.value)" title="KPI — ada EPF"></td>
+                  <td><input class="ci" type="number" min="0" step="0.01" :value="getField(emp.id,'kfi')" @change="upField(emp.id,'kfi',$event.target.value)" title="KFI — ada EPF"></td>
+                  <td><input class="ci" type="number" min="0" step="0.01" :value="getField(emp.id,'incentive')" @change="upField(emp.id,'incentive',$event.target.value)" title="Incentive — tiada EPF"></td>
+                  <td><input class="ci" type="number" min="0" step="0.01" :value="getField(emp.id,'perfBonus')" @change="upField(emp.id,'perfBonus',$event.target.value)" title="Basic Performance"></td>
+                  <td><input class="ci" type="number" min="0" step="0.01" :value="getField(emp.id,'submissionLoan')" @change="upField(emp.id,'submissionLoan',$event.target.value)" title="Total Submission Loan"></td>
                   <td><input class="ci" type="number" min="0" step="0.01" :value="getField(emp.id,'advance')" @change="upField(emp.id,'advance',$event.target.value)"></td>
-                  <td class="tr">{{emp.exempt?'—':f2(calcRow(emp).epfE)}}</td>
-                  <td class="tr">{{emp.exempt?'—':f2(calcRow(emp).socsoE)}}</td>
-                  <td class="tr">{{emp.exempt?'—':f2(calcRow(emp).eisE)}}</td>
+                  <td class="tr">{{(!emp.hasEpf||emp.exempt)?'—':f2(calcRow(emp).epfE)}}</td>
+                  <td class="tr">{{(!emp.hasEpf||emp.exempt)?'—':f2(calcRow(emp).socsoE)}}</td>
+                  <td class="tr">{{(!emp.hasEpf||emp.exempt)?'—':f2(calcRow(emp).eisE)}}</td>
                   <td class="tr">{{calcRow(emp).unpaid>0?f2(calcRow(emp).unpaid):'—'}}</td>
                   <td class="tr" style="font-weight:600">{{f2(calcRow(emp).totalDed)}}</td>
                   <td class="tg">RM {{f2(calcRow(emp).net)}}</td>
@@ -575,7 +575,7 @@ tr:hover td{background:rgba(201,168,76,.025)}
           </tbody>
         </table>
         <div class="psgn">
-          <div><div>APPROVED BY &nbsp;:&nbsp; _______________________</div><div style="margin-top:5px">DATE &nbsp;:&nbsp; _______________________</div></div>
+          <div><div>APPROVED BY &nbsp;:&nbsp; <b>WILSON</b></div><div style="margin-top:5px">DATE &nbsp;:&nbsp; <b>{{psApprovedDate}}</b></div></div>
           <div style="text-align:right"><div>RECEIVED BY &nbsp;:&nbsp; _______________________</div><div style="margin-top:5px">DATE &nbsp;:&nbsp; _______________________</div></div>
         </div>
       </div>
@@ -623,18 +623,20 @@ tr:hover td{background:rgba(201,168,76,.025)}
               <td class="hqr">{{hqInfo.c.epfE>0?'RM '+f2(hqInfo.c.epfE):'RM'}}</td>
             </tr>
             <tr>
-              <td>{{(hqInfo.c.commEpf||0)*1>0?'COMMISSION (EPF)':((hqInfo.c.commNoEpf||0)*1>0?'COMMISSION (NO EPF)':'')}}</td>
-              <td class="hqr">{{((hqInfo.c.commEpf||0)*1+(hqInfo.c.commNoEpf||0)*1)>0?'RM '+f2((hqInfo.c.commEpf||0)*1+(hqInfo.c.commNoEpf||0)*1):'RM'}}</td>
+              <td>KPI COMMISSION</td>
+              <td class="hqr">{{hqInfo.c.kpi>0?'RM '+f2(hqInfo.c.kpi):'RM'}}</td>
               <td>SOCSO</td>
               <td class="hqr">{{hqInfo.c.socsoE>0?'RM '+f2(hqInfo.c.socsoE):'RM'}}</td>
             </tr>
             <tr>
-              <td></td><td class="hqr">RM</td>
+              <td>KFI COMMISSION</td>
+              <td class="hqr">{{hqInfo.c.kfi>0?'RM '+f2(hqInfo.c.kfi):'RM'}}</td>
               <td>EIS</td>
               <td class="hqr">{{hqInfo.c.eisE>0?'RM '+f2(hqInfo.c.eisE):'RM'}}</td>
             </tr>
             <tr>
-              <td></td><td class="hqr">RM</td>
+              <td>INCENTIVE</td>
+              <td class="hqr">{{hqInfo.c.incentive>0?'RM '+f2(hqInfo.c.incentive):'RM'}}</td>
               <td>ADVANCE</td>
               <td class="hqr">{{(hqInfo.c.advance||0)*1>0?'RM '+f2(hqInfo.c.advance):'RM'}}</td>
             </tr>
@@ -677,19 +679,19 @@ tr:hover td{background:rgba(201,168,76,.025)}
             </tr>
             <tr>
               <td class="hqb">KPI</td>
-              <td>{{(hqInfo.c.perfBonus||0)*1>0?f2(hqInfo.c.perfBonus):''}}</td>
+              <td>{{hqInfo.c.kpi>0?f2(hqInfo.c.kpi):''}}</td>
               <td>UNPAID LEAVE</td>
               <td class="hqr">{{hqInfo.c.leaveDays>0?hqInfo.c.leaveDays:''}}</td>
             </tr>
             <tr>
               <td class="hqb">KFI</td>
-              <td></td>
+              <td>{{hqInfo.c.kfi>0?f2(hqInfo.c.kfi):''}}</td>
               <td>KWSP</td>
               <td></td>
             </tr>
             <tr>
               <td class="hqb">TOTAL SUBMISSION LOAN</td>
-              <td>{{hqInfo.totalLoan?'RM '+f2(hqInfo.totalLoan):'RM'}}</td>
+              <td>{{hqInfo.c.submissionLoan>0?'RM '+f2(hqInfo.c.submissionLoan):'RM'}}</td>
               <td>SOCSO</td>
               <td></td>
             </tr>
@@ -744,18 +746,23 @@ tr:hover td{background:rgba(201,168,76,.025)}
         <div><label class="fl">Nama</label><input class="fi" v-model="empForm.emergencyName" placeholder="Ahmad bin Johari"></div>
         <div><label class="fl">No. Telefon</label><input class="fi" v-model="empForm.emergencyPhone" placeholder="0123456789"></div>
         <div><label class="fl">Hubungan</label><input class="fi" v-model="empForm.emergencyRelation" placeholder="Bapa / Suami"></div>
-        <div class="fg1">
+        <div class="fg1" style="border-top:1px solid #1e3660;padding-top:.7rem;margin-top:.2rem">
+          <div style="font-size:.68rem;color:#7090b8;font-weight:600;text-transform:uppercase;letter-spacing:.07em;margin-bottom:.5rem">Tetapan Staff</div>
           <label class="cbr">
+            <input type="checkbox" v-model="empForm.hasEpf">
+            ✅ Ada EPF / SOCSO / EIS
+          </label>
+          <label class="cbr" style="margin-top:.45rem">
+            <input type="checkbox" v-model="empForm.unpaidLeave">
+            🗓️ Cuti / MC Tanpa Gaji (potong gaji kalau ambil cuti)
+          </label>
+          <label class="cbr" style="margin-top:.45rem">
+            <input type="checkbox" v-model="empForm.isConfirmed">
+            🏅 Confirmation Staff
+          </label>
+          <label class="cbr" style="margin-top:.45rem;opacity:.6">
             <input type="checkbox" v-model="empForm.exempt">
-            Exempt EPF / SOCSO / EIS (Director / Pekerja Asing / Umur 75+)
-          </label>
-          <label class="cbr" style="margin-top:.5rem">
-            <input type="checkbox" v-model="empForm.confirmed">
-            Staff Confirmed (ada EPF / SOCSO / EIS)
-          </label>
-          <label class="cbr" style="margin-top:.5rem">
-            <input type="checkbox" v-model="empForm.hasUnpaid">
-            Boleh ada Cuti Tanpa Gaji (Unpaid Leave)
+            ⛔ Exempt semua (Director / Asing / 75+)
           </label>
         </div>
       </div>
@@ -820,24 +827,29 @@ function calSOCSO(w){if(!w||w<=0)return{e:0,r:0};const c=Math.min(w,5000),bl=c%5
 function calEIS(w){if(!w||w<=0)return{e:0,r:0};const c=Math.min(w,4000),bl=c%50===0?Math.max(0,c-50):Math.floor(c/50)*50;const a=R2(Math.floor(bl*0.002*100)/100);return{e:a,r:a};}
 function compute(emp,raw={},wd=22){
   const b=+(emp.basicSalary||0);
-  const commEpf=+(raw.commEpf||0);      // commission yang dikira EPF
-  const commNoEpf=+(raw.commNoEpf||0);  // commission tanpa EPF
-  const perf=+(raw.perfBonus||0);       // basic of performance
-  const al=+(raw.allowance||0);
-  // EPF base = basic + EPF-able commission + perf bonus
-  const epfBase = b + commEpf + perf;
-  const gross = b + commEpf + commNoEpf + perf + al;
-  // Exempt: no EPF/SOCSO/EIS if exempt OR not yet confirmed
-  const ex = !!emp.exempt || !emp.confirmed;
+  const kpi=+(raw.kpi||0);          // KPI commission — EPF-able
+  const kfi=+(raw.kfi||0);          // KFI commission — EPF-able
+  const incentive=+(raw.incentive||0); // Incentive — NO EPF
+  const perf=+(raw.perfBonus||0);   // Basic Performance — EPF-able
+  // EPF base = basic + KPI + KFI + Basic Performance
+  const epfBase = b + kpi + kfi + perf;
+  const gross = b + kpi + kfi + incentive + perf;
+  // No EPF/SOCSO/EIS if exempt OR not ticked "Ada EPF"
+  const ex = !!emp.exempt || !emp.hasEpf;
   const ep=ex?{e:0,r:0}:calEPF(epfBase);
   const so=ex?{e:0,r:0}:calSOCSO(b);
   const ei=ex?{e:0,r:0}:calEIS(b);
-  // Unpaid leave: only deduct if emp.hasUnpaid is true
+  // Unpaid leave: only if emp.unpaidLeave ticked
   const lv=+(raw.leaveDays||0);
-  const unp=(emp.hasUnpaid!==false)&&wd>0&&lv>0?R2((lv/wd)*b):0;
+  const mc=+(raw.mcDays||0);
+  const unp=emp.unpaidLeave&&wd>0&&lv>0?R2((lv/wd)*b):0;
   const late=+(raw.lateAmt||0),adv=+(raw.advance||0);
+  const submission=+(raw.submissionLoan||0);
   const ded=R2(ep.e+so.e+ei.e+unp+late+adv);
-  return{...raw,gross,epfBase,epfE:ep.e,epfR:ep.r,socsoE:so.e,socsoR:so.r,eisE:ei.e,eisR:ei.r,unpaid:unp,leaveDays:lv,mcDays:+(raw.mcDays||0),totalDed:ded,net:R2(gross-ded)};
+  return{...raw,gross,epfBase,kpi,kfi,incentive,perf,
+    epfE:ep.e,epfR:ep.r,socsoE:so.e,socsoR:so.r,eisE:ei.e,eisR:ei.r,
+    unpaid:unp,leaveDays:lv,mcDays:mc,submissionLoan:submission,
+    totalDed:ded,net:R2(gross-ded)};
 }
 function parseCSV(text){
   const lines=text.replace(/\r\n/g,'\n').replace(/\r/g,'\n').trim().split('\n');
@@ -964,7 +976,7 @@ createApp({
       if(!activeEmps.value.length){alert('Tambah employee dulu!');return;}
       if(currentPR.value){notify('Bulan ini dah ada payroll!');return;}
       const entries={};
-      activeEmps.value.forEach(e=>{entries[e.id]={commEpf:0,commNoEpf:0,perfBonus:0,allowance:0,leaveDays:0,mcDays:0,lateAmt:0,advance:0};});
+      activeEmps.value.forEach(e=>{entries[e.id]={kpi:0,kfi:0,incentive:0,perfBonus:0,leaveDays:0,mcDays:0,lateAmt:0,advance:0,submissionLoan:0};});
       prls.value[activeYM.value]={ym:activeYM.value,workingDays:wdInput.value||22,entries};
       savePrls(); notify('✅ Payroll '+MONTHS[mo.value-1]+' '+yr.value+' sudah dibuka!');
     };
@@ -984,7 +996,7 @@ createApp({
     // ── EMPLOYEES ──
     const openEmpModal = emp => {
       if(emp){ empForm.value={...emp}; }
-      else { empForm.value={name:'',nric:'',address:'',bank:'',accountNo:'',dept:'',position:'',basicSalary:1700,joinDate:'',resignDate:'',emergencyName:'',emergencyPhone:'',emergencyRelation:'',exempt:false,confirmed:false,hasUnpaid:false}; }
+      else { empForm.value={name:'',nric:'',address:'',bank:'',accountNo:'',dept:'',position:'',basicSalary:1700,joinDate:'',resignDate:'',emergencyName:'',emergencyPhone:'',emergencyRelation:'',exempt:false,hasEpf:false,unpaidLeave:false,isConfirmed:false}; }
       empModalOpen.value=true;
     };
     const saveEmp = () => {
@@ -1042,7 +1054,9 @@ createApp({
     const hqDateStr = computed(()=>{
       if(!hqInfo.value) return '';
       const [y,m]=hqInfo.value.ym.split('-').map(Number);
-      return '01.'+String(m).padStart(2,'0')+'.'+y;
+      // last day of month
+      const lastDay = new Date(y, m, 0).getDate();
+      return String(lastDay).padStart(2,'0')+'.'+String(m).padStart(2,'0')+'.'+y;
     });
     const openHQ = (emp,c,ym) => {
       // auto payslip number: count how many months this emp has been paid
@@ -1056,19 +1070,33 @@ createApp({
       const [y,m]=printInfo.value.ym.split('-').map(Number);
       return MONTHS[m-1].toUpperCase()+' '+y;
     });
+    // Employee payslip date = 1st of NEXT month
+    const psApprovedDate = computed(()=>{
+      if(!printInfo.value) return '';
+      const [y,m]=printInfo.value.ym.split('-').map(Number);
+      const nm=m===12?1:m+1, ny=m===12?y+1:y;
+      return '01.'+String(nm).padStart(2,'0')+'.'+ny;
+    });
     const psRows = computed(()=>{
       if(!printInfo.value) return [];
       const c=printInfo.value.c;
-      const b=+(printInfo.value.emp.basicSalary||0),commEpf=+(c.commEpf||0),commNoEpf=+(c.commNoEpf||0),perf=+(c.perfBonus||0),al=+(c.allowance||0);
+      const b=+(printInfo.value.emp.basicSalary||0);
       const earn=[
         {el:'BASIC SALARY',ea:b},
-        {el:commEpf>0?'COMMISSION (EPF)':'',ea:commEpf>0?commEpf:null},
-        {el:commNoEpf>0?'COMMISSION (NON-EPF)':'',ea:commNoEpf>0?commNoEpf:null},
-        {el:perf>0?'BASIC OF PERFORMANCE':'',ea:perf>0?perf:null},
-        {el:al>0?'ALLOWANCE (ELAUN)':'',ea:al>0?al:null},
+        {el:c.kpi>0?'KPI COMMISSION':'',ea:c.kpi>0?c.kpi:null},
+        {el:c.kfi>0?'KFI COMMISSION':'',ea:c.kfi>0?c.kfi:null},
+        {el:c.incentive>0?'INCENTIVE':'',ea:c.incentive>0?c.incentive:null},
+        {el:c.perf>0?'BASIC PERFORMANCE':'',ea:c.perf>0?c.perf:null},
         {el:'',ea:null},
       ];
-      const ded=[{dl:'EPF (KWSP)',da:c.epfE>0?c.epfE:null},{dl:'SOCSO',da:c.socsoE>0?c.socsoE:null},{dl:'EIS',da:c.eisE>0?c.eisE:null},{dl:'UNPAID LEAVE',da:c.unpaid>0?c.unpaid:null},{dl:'ADVANCE',da:(c.advance||0)*1>0?c.advance:null},{dl:'LATE',da:(c.lateAmt||0)*1>0?c.lateAmt:null}];
+      const ded=[
+        {dl:'EPF (KWSP)',da:c.epfE>0?c.epfE:null},
+        {dl:'SOCSO',da:c.socsoE>0?c.socsoE:null},
+        {dl:'EIS',da:c.eisE>0?c.eisE:null},
+        {dl:'UNPAID LEAVE',da:c.unpaid>0?c.unpaid:null},
+        {dl:'ADVANCE',da:(c.advance||0)*1>0?c.advance:null},
+        {dl:'LATE',da:(c.lateAmt||0)*1>0?c.lateAmt:null},
+      ];
       return earn.map((e,i)=>({...e,...(ded[i]||{dl:'',da:null})}));
     });
 
@@ -1109,7 +1137,7 @@ createApp({
       yr,mo,wdInput,activeEmps,activeYM,currentPR,
       getField,calcRow,payrollTotals,
       empModalOpen,empForm,showCSV,csvPreview,csvErr,
-      printInfo,printMonthStr,psRows,
+      printInfo,printMonthStr,psApprovedDate,psRows,
       hqInfo,hqApprover,hqDateStr,
       rptYM,sortedPRLKeys,rptRows,rptTotals,
       empYr,empMo,empYM,empCurrentPR,empRaw,empCalc,
