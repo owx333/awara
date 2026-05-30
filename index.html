@@ -310,7 +310,6 @@ tr:hover td{background:rgba(201,168,76,.025)}
         <button :class="['ni',{on:view==='payroll'}]" @click="view='payroll'">💰 Payroll</button>
         <button :class="['ni',{on:view==='employees'}]" @click="view='employees'">👥 Employees</button>
         <button :class="['ni',{on:view==='reports'}]" @click="view='reports'">📊 Reports</button>
-        <button :class="['ni',{on:view==='kpireport'}]" @click="view='kpireport'">🏆 KPI/KFI Report</button>
         <button class="ni lo" @click="logout">🔒 Logout</button>
       </nav>
     </aside>
@@ -362,7 +361,7 @@ tr:hover td{background:rgba(201,168,76,.025)}
               <tbody>
                 <tr v-for="(emp,idx) in activeEmps" :key="emp.id">
                   <td style="color:#7090b8">{{idx+1}}</td>
-                  <td><div class="te">{{emp.name}}</div><div class="te2">{{emp.position}} <span v-if="!emp.hasEpf" class="b bx" style="font-size:.56rem">No EPF</span><span v-if="emp.isConfirmed" class="b ba" style="font-size:.56rem">✅ Confirmed{{emp.confirmDate?' ('+emp.confirmDate+')':''}}</span></div></td>
+                  <td><div class="te">{{emp.name}}</div><div class="te2">{{emp.position}} <span v-if="!emp.hasEpf" class="b bx" style="font-size:.56rem">No EPF</span><span v-if="emp.isConfirmed" class="b ba" style="font-size:.56rem">Confirmed</span></div></td>
                   <td class="tn">{{f2(emp.basicSalary)}}</td>
                   <td><input class="ci" type="number" min="0" step="0.5" :value="getField(emp.id,'leaveDays')" @change="upField(emp.id,'leaveDays',$event.target.value)" :style="!emp.unpaidLeave?'opacity:.35':''"></td>
                   <td><input class="ci" type="number" min="0" :value="getField(emp.id,'mcDays')" @change="upField(emp.id,'mcDays',$event.target.value)"></td>
@@ -413,7 +412,6 @@ tr:hover td{background:rgba(201,168,76,.025)}
           <span style="color:#7090b8;font-size:.72rem">{{activeEmps.length}} aktif · {{emps.length}} jumlah</span>
           <div style="display:flex;gap:.5rem">
             <button class="bs" @click="showCSV=true">📂 Import CSV</button>
-            <button class="bs" @click="exportEmpCSV" style="background:#162a4a;border-color:#22406e;color:#38d474">📤 Export CSV</button>
             <button class="bgld" style="width:auto;padding:.36rem .88rem;margin-top:0;font-size:.74rem" @click="openEmpModal(null)">+ Tambah</button>
           </div>
         </div>
@@ -509,151 +507,6 @@ tr:hover td{background:rgba(201,168,76,.025)}
                 </tr>
               </tfoot>
             </table>
-          </div>
-        </template>
-      </div>
-
-
-      <!-- ====== KPI/KFI REPORT VIEW ====== -->
-      <div v-else-if="view==='kpireport'">
-        <div class="pt">KPI / KFI <span class="pts">Performance Report</span></div>
-        <div v-if="!sortedPRLKeys.length" class="sc" style="text-align:center;color:#7090b8;padding:3rem">
-          Belum ada data payroll. Buka bulan payroll dahulu.
-        </div>
-        <template v-else>
-          <div class="cr">
-            <select class="cs" v-model="kpiYM">
-              <option v-for="ym in sortedPRLKeys" :value="ym">{{rptLabel(ym)}}</option>
-            </select>
-            <button class="bs" @click="printKPI">🖨️ Print</button>
-            <span style="color:#7090b8;font-size:.7rem">{{rptLabel(kpiYM)}}</span>
-          </div>
-          <div class="tw" id="kpi-table">
-            <table>
-              <thead>
-                <tr>
-                  <th rowspan="2" style="vertical-align:middle">#</th>
-                  <th rowspan="2" style="vertical-align:middle">NAME</th>
-                  <th rowspan="2" style="vertical-align:middle;text-align:center">PAYSLIP</th>
-                  <th colspan="3" style="text-align:center;border-bottom:1px solid #22406e">KPI</th>
-                  <th rowspan="2" style="vertical-align:middle;text-align:center">RESUBMIT</th>
-                  <th rowspan="2" style="vertical-align:middle;text-align:center">TOTAL KPI</th>
-                  <th colspan="2" style="text-align:center;border-bottom:1px solid #22406e">LOAN AMOUNT</th>
-                  <th rowspan="2" style="vertical-align:middle;text-align:center">TOTAL LOAN</th>
-                  <th colspan="2" style="text-align:center;border-bottom:1px solid #22406e">KFI DISBURSE</th>
-                  <th rowspan="2" style="vertical-align:middle;text-align:center">TOTAL KFI</th>
-                  <th colspan="2" style="text-align:center;border-bottom:1px solid #22406e">REJECT CASE</th>
-                  <th rowspan="2" style="vertical-align:middle;text-align:center;color:#f5c842">TOTAL</th>
-                </tr>
-                <tr>
-                  <th style="text-align:center">NORMAL</th>
-                  <th style="text-align:center">SPECIAL</th>
-                  <th style="text-align:center">RESUBMIT</th>
-                  <th style="text-align:center">NORMAL</th>
-                  <th style="text-align:center">SPECIAL</th>
-                  <th style="text-align:center">NORMAL</th>
-                  <th style="text-align:center">SPECIAL</th>
-                  <th style="text-align:center">KPI</th>
-                  <th style="text-align:center">KFI</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(row,i) in kpiRows" :key="row.emp.id">
-                  <td style="color:#7090b8;text-align:center">{{i+1}}</td>
-                  <td><div class="te">{{row.emp.name}}</div><div class="te2">{{row.emp.position}}</div></td>
-                  <td style="text-align:center">
-                    <input class="ci" style="width:3.5rem;text-align:center" type="number" min="0"
-                      :value="getKpiField(row.emp.id,'payslipNo')"
-                      @change="upKpiField(row.emp.id,'payslipNo',$event.target.value)">
-                  </td>
-                  <td style="text-align:center">
-                    <input class="ci" style="width:3.5rem;text-align:center" type="number" min="0"
-                      :value="getKpiField(row.emp.id,'kpiNormal')"
-                      @change="upKpiField(row.emp.id,'kpiNormal',$event.target.value)">
-                  </td>
-                  <td style="text-align:center">
-                    <input class="ci" style="width:3.5rem;text-align:center" type="number" min="0"
-                      :value="getKpiField(row.emp.id,'kpiSpecial')"
-                      @change="upKpiField(row.emp.id,'kpiSpecial',$event.target.value)">
-                  </td>
-                  <td style="text-align:center">
-                    <input class="ci" style="width:3.5rem;text-align:center" type="number" min="0"
-                      :value="getKpiField(row.emp.id,'kpiResubmit')"
-                      @change="upKpiField(row.emp.id,'kpiResubmit',$event.target.value)">
-                  </td>
-                  <td style="text-align:center">
-                    <input class="ci" style="width:3.5rem;text-align:center" type="number" min="0"
-                      :value="getKpiField(row.emp.id,'resubmit')"
-                      @change="upKpiField(row.emp.id,'resubmit',$event.target.value)">
-                  </td>
-                  <td class="tn" style="text-align:center;font-weight:600;color:#dce8f8">
-                    {{(getKpiField(row.emp.id,'kpiNormal')*1)+(getKpiField(row.emp.id,'kpiSpecial')*1)+(getKpiField(row.emp.id,'kpiResubmit')*1)}}
-                  </td>
-                  <td style="text-align:center">
-                    <input class="ci" style="width:5rem;text-align:right" type="number" min="0"
-                      :value="getKpiField(row.emp.id,'loanNormal')"
-                      @change="upKpiField(row.emp.id,'loanNormal',$event.target.value)">
-                  </td>
-                  <td style="text-align:center">
-                    <input class="ci" style="width:5rem;text-align:right" type="number" min="0"
-                      :value="getKpiField(row.emp.id,'loanSpecial')"
-                      @change="upKpiField(row.emp.id,'loanSpecial',$event.target.value)">
-                  </td>
-                  <td class="tn" style="text-align:right;font-weight:600;color:#dce8f8">
-                    {{((getKpiField(row.emp.id,'loanNormal')*1)+(getKpiField(row.emp.id,'loanSpecial')*1)).toLocaleString()}}
-                  </td>
-                  <td style="text-align:center">
-                    <input class="ci" style="width:5rem;text-align:right" type="number" min="0"
-                      :value="getKpiField(row.emp.id,'kfiNormal')"
-                      @change="upKpiField(row.emp.id,'kfiNormal',$event.target.value)">
-                  </td>
-                  <td style="text-align:center">
-                    <input class="ci" style="width:5rem;text-align:right" type="number" min="0"
-                      :value="getKpiField(row.emp.id,'kfiSpecial')"
-                      @change="upKpiField(row.emp.id,'kfiSpecial',$event.target.value)">
-                  </td>
-                  <td class="tn" style="text-align:right;font-weight:600;color:#dce8f8">
-                    {{((getKpiField(row.emp.id,'kfiNormal')*1)+(getKpiField(row.emp.id,'kfiSpecial')*1)).toLocaleString()}}
-                  </td>
-                  <td style="text-align:center">
-                    <input class="ci" style="width:3.5rem;text-align:center" type="number" min="0"
-                      :value="getKpiField(row.emp.id,'rejectKpi')"
-                      @change="upKpiField(row.emp.id,'rejectKpi',$event.target.value)">
-                  </td>
-                  <td style="text-align:center">
-                    <input class="ci" style="width:5rem;text-align:right" type="number" min="0"
-                      :value="getKpiField(row.emp.id,'rejectKfi')"
-                      @change="upKpiField(row.emp.id,'rejectKfi',$event.target.value)">
-                  </td>
-                  <td class="tg" style="text-align:right;font-weight:700">
-                    {{kpiRowTotal(row.emp.id).toLocaleString()}}
-                  </td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr class="tfoot-row" style="color:#e05555;font-weight:700">
-                  <td colspan="2" style="text-align:right;font-size:.7rem">TOTAL</td>
-                  <td style="text-align:center">{{kpiColSum('payslipNo')}}</td>
-                  <td style="text-align:center">{{kpiColSum('kpiNormal')}}</td>
-                  <td style="text-align:center">{{kpiColSum('kpiSpecial')}}</td>
-                  <td style="text-align:center">{{kpiColSum('kpiResubmit')}}</td>
-                  <td style="text-align:center">{{kpiColSum('resubmit')}}</td>
-                  <td style="text-align:center">{{kpiColSum('kpiNormal')+kpiColSum('kpiSpecial')+kpiColSum('kpiResubmit')}}</td>
-                  <td style="text-align:right">{{kpiColSum('loanNormal').toLocaleString()}}</td>
-                  <td style="text-align:right">{{kpiColSum('loanSpecial').toLocaleString()}}</td>
-                  <td style="text-align:right">{{(kpiColSum('loanNormal')+kpiColSum('loanSpecial')).toLocaleString()}}</td>
-                  <td style="text-align:right">{{kpiColSum('kfiNormal').toLocaleString()}}</td>
-                  <td style="text-align:right">{{kpiColSum('kfiSpecial').toLocaleString()}}</td>
-                  <td style="text-align:right">{{(kpiColSum('kfiNormal')+kpiColSum('kfiSpecial')).toLocaleString()}}</td>
-                  <td style="text-align:center">{{kpiColSum('rejectKpi')}}</td>
-                  <td style="text-align:right">{{kpiColSum('rejectKfi').toLocaleString()}}</td>
-                  <td class="tg" style="font-weight:700">{{kpiGrandTotal().toLocaleString()}}</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-          <div style="margin-top:.6rem;color:#7090b8;font-size:.62rem;padding:.4rem .6rem;background:#111f38;border-radius:6px">
-            💡 <b>PAYSLIP</b> = jumlah payslip bulan ini (Basic of Performance) · <b>TOTAL</b> = Total Loan + Total KFI + Reject KFI
           </div>
         </template>
       </div>
@@ -904,13 +757,9 @@ tr:hover td{background:rgba(201,168,76,.025)}
             🗓️ Cuti / MC Tanpa Gaji (potong gaji kalau ambil cuti)
           </label>
           <label class="cbr" style="margin-top:.45rem">
-            <input type="checkbox" v-model="empForm.isConfirmed" @change="if(!empForm.isConfirmed) empForm.confirmDate=''">
+            <input type="checkbox" v-model="empForm.isConfirmed">
             🏅 Confirmation Staff
           </label>
-          <div v-if="empForm.isConfirmed" style="margin-top:.4rem;margin-left:1.4rem">
-            <label class="fl" style="font-size:.68rem;color:#7090b8">Tarikh Confirmation</label>
-            <input class="fi" type="date" v-model="empForm.confirmDate" style="max-width:160px">
-          </div>
           <label class="cbr" style="margin-top:.45rem;opacity:.6">
             <input type="checkbox" v-model="empForm.exempt">
             ⛔ Exempt semua (Director / Asing / 75+)
@@ -1147,7 +996,7 @@ createApp({
     // ── EMPLOYEES ──
     const openEmpModal = emp => {
       if(emp){ empForm.value={...emp}; }
-      else { empForm.value={name:'',nric:'',address:'',bank:'',accountNo:'',dept:'',position:'',basicSalary:1700,joinDate:'',resignDate:'',confirmDate:'',emergencyName:'',emergencyPhone:'',emergencyRelation:'',exempt:false,hasEpf:false,unpaidLeave:false,isConfirmed:false}; }
+      else { empForm.value={name:'',nric:'',address:'',bank:'',accountNo:'',dept:'',position:'',basicSalary:1700,joinDate:'',resignDate:'',emergencyName:'',emergencyPhone:'',emergencyRelation:'',exempt:false,hasEpf:false,unpaidLeave:false,isConfirmed:false}; }
       empModalOpen.value=true;
     };
     const saveEmp = () => {
@@ -1280,105 +1129,6 @@ createApp({
       savePrls(); notify('✅ Disimpan');
     };
 
-
-    // ── KPI/KFI REPORT ──
-    const kpiYM = ref('');
-    const kpiData = ref({}); // { ym: { empId: { kpiNormal, kpiSpecial, ... } } }
-
-    // Load from localStorage
-    const LS_KPI = 'awara_kpi';
-    const loadKpi = () => { const v=lsGet(LS_KPI); if(v) kpiData.value=v; };
-    const saveKpi = () => lsSet(LS_KPI, kpiData.value);
-    loadKpi();
-
-    watch(sortedPRLKeys, keys => { if(keys.length && !kpiYM.value) kpiYM.value=keys[0]; });
-
-    const kpiRows = computed(() => {
-      if(!kpiYM.value) return [];
-      return activeEmps.value.map(emp => ({ emp }));
-    });
-
-    const getKpiField = (empId, field) => {
-      const ym = kpiYM.value;
-      return kpiData.value?.[ym]?.[empId]?.[field] ?? 0;
-    };
-
-    const upKpiField = (empId, field, val) => {
-      const ym = kpiYM.value;
-      if(!kpiData.value[ym]) kpiData.value[ym] = {};
-      if(!kpiData.value[ym][empId]) kpiData.value[ym][empId] = {};
-      kpiData.value[ym][empId][field] = isNaN(+val) ? 0 : +val;
-      saveKpi();
-    };
-
-    const kpiRowTotal = (empId) => {
-      const ln = getKpiField(empId,'loanNormal')*1;
-      const ls = getKpiField(empId,'loanSpecial')*1;
-      const kn = getKpiField(empId,'kfiNormal')*1;
-      const ks = getKpiField(empId,'kfiSpecial')*1;
-      const rk = getKpiField(empId,'rejectKfi')*1;
-      return ln + ls + kn + ks + rk;
-    };
-
-    const kpiColSum = (field) => {
-      if(!kpiYM.value) return 0;
-      return activeEmps.value.reduce((s,emp) => s + getKpiField(emp.id, field)*1, 0);
-    };
-
-    const kpiGrandTotal = () => {
-      return activeEmps.value.reduce((s,emp) => s + kpiRowTotal(emp.id), 0);
-    };
-
-    const printKPI = () => {
-      const tbl = document.getElementById('kpi-table');
-      if(!tbl) return;
-      const w = window.open('','_blank','width=1200,height=800');
-      w.document.write('<html><head><title>KPI/KFI Report - '+rptLabel(kpiYM.value)+'</title><style>');
-      w.document.write('body{font-family:Arial,sans-serif;font-size:10px;color:#000;margin:10mm}');
-      w.document.write('table{border-collapse:collapse;width:100%}');
-      w.document.write('th,td{border:1px solid #999;padding:3px 5px;white-space:nowrap}');
-      w.document.write('th{background:#ddd;font-weight:bold;text-align:center}');
-      w.document.write('input{border:none;background:transparent;font-size:10px;width:100%;text-align:inherit}');
-      w.document.write('tfoot tr td{background:#f5c842;color:#000;font-weight:700;border-top:2px solid #000}');
-      w.document.write('.tg{color:#000;font-weight:700}h2{margin:0 0 6px;font-size:14px}p{margin:0 0 8px;font-size:11px;color:#555}');
-      w.document.write('</style></head><body>');
-      w.document.write('<h2>AWARA SDN BHD — KPI / KFI Performance Report</h2>');
-      w.document.write('<p>Bulan: <b>'+rptLabel(kpiYM.value)+'</b></p>');
-      w.document.write(tbl.outerHTML);
-      w.document.write('</body></html>');
-      w.document.close();
-      w.focus();
-      setTimeout(() => { w.print(); }, 500);
-    };
-
-
-    // ── EXPORT EMPLOYEES CSV ──
-    const exportEmpCSV = () => {
-      const headers = ['Name','NRIC','Position','Department','Basic Salary','Join Date','Resign Date',
-        'Bank','Account No','Address','Emergency Name','Emergency Phone','Emergency Relation',
-        'Has EPF','Unpaid Leave','Is Confirmed','Confirm Date','Exempt'];
-      const esc = v => {
-        const s = String(v==null?'':v);
-        return s.includes(',') || s.includes('"') || s.includes('\n') ? '"'+s.replace(/"/g,'""')+'"' : s;
-      };
-      const rows = [headers.join(',')];
-      emps.value.filter(e=>e.isActive!==false).forEach(e => {
-        rows.push([
-          e.name, e.nric, e.position, e.dept, e.basicSalary,
-          e.joinDate, e.resignDate, e.bank, e.accountNo, e.address,
-          e.emergencyName, e.emergencyPhone, e.emergencyRelation,
-          e.hasEpf?'Yes':'No', e.unpaidLeave?'Yes':'No',
-          e.isConfirmed?'Yes':'No', e.confirmDate||'', e.exempt?'Yes':'No'
-        ].map(esc).join(','));
-      });
-      const blob = new Blob([rows.join('\n')], {type:'text/csv;charset=utf-8;'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = 'awara_employees_'+new Date().toISOString().slice(0,10)+'.csv';
-      a.click(); URL.revokeObjectURL(url);
-      notify('✅ Export CSV berjaya!');
-    };
-
     watch(sortedPRLKeys,(keys)=>{ if(keys.length&&!rptYM.value) rptYM.value=keys[0]; });
 
     return{
@@ -1396,9 +1146,7 @@ createApp({
       initMonth,upField,updateWD,
       openEmpModal,saveEmp,deactivate,reactivate,
       dlTemplate,readCSV,doImportCSV,
-      exportEmpCSV,
       openPrint,doPrint,openHQ,doHQPrint,rptLabel,printReport,
-      kpiYM,kpiRows,getKpiField,upKpiField,kpiRowTotal,kpiColSum,kpiGrandTotal,printKPI,
       empUpdateField,
     };
   }
