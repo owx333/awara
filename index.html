@@ -515,8 +515,8 @@ tr:hover td{background:rgba(201,168,76,.025)}
 
 
       <!-- ====== KPI/KFI REPORT VIEW ====== -->
-      <div v-else-if="view='kpireport'">
-        <div class="pt">Monthly Performance <span class="pts">Report</span></div>
+      <div v-else-if="view==='kpireport'">
+        <div class="pt">KPI / KFI <span class="pts">Performance Report</span></div>
         <div v-if="!sortedPRLKeys.length" class="sc" style="text-align:center;color:#7090b8;padding:3rem">
           Belum ada data payroll. Buka bulan payroll dahulu.
         </div>
@@ -528,43 +528,105 @@ tr:hover td{background:rgba(201,168,76,.025)}
             <button class="bs" @click="printKPI">🖨️ Print</button>
             <span style="color:#7090b8;font-size:.7rem">{{rptLabel(kpiYM)}}</span>
           </div>
-
-          <!-- SECTION 1: Basic Performance -->
-          <div style="color:#f5c842;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin:1rem 0 .4rem;padding-bottom:.3rem;border-bottom:1px solid #1e3660">
-            📋 Basic Performance — Payslip / KPI / KFI
-          </div>
-          <div class="tw" id="perf-table">
+          <div class="tw" id="kpi-table">
             <table>
               <thead>
                 <tr>
-                  <th>#</th><th>NAME</th>
-                  <th style="text-align:center">PAYSLIP<br><span style="font-weight:400;font-size:.63rem;opacity:.7">(bilangan)</span></th>
-                  <th style="text-align:right">KPI COMM (RM)<br><span style="font-weight:400;font-size:.63rem;opacity:.7">EPF-able</span></th>
-                  <th style="text-align:right">KFI COMM (RM)<br><span style="font-weight:400;font-size:.63rem;opacity:.7">EPF-able</span></th>
-                  <th style="text-align:right;color:#f5c842">TOTAL COMM (RM)</th>
+                  <th rowspan="2" style="vertical-align:middle">#</th>
+                  <th rowspan="2" style="vertical-align:middle">NAME</th>
+                  <th rowspan="2" style="vertical-align:middle;text-align:center">PAYSLIP</th>
+                  <th colspan="3" style="text-align:center;border-bottom:1px solid #22406e">KPI</th>
+                  <th rowspan="2" style="vertical-align:middle;text-align:center">RESUBMIT</th>
+                  <th rowspan="2" style="vertical-align:middle;text-align:center">TOTAL KPI</th>
+                  <th colspan="2" style="text-align:center;border-bottom:1px solid #22406e">LOAN AMOUNT</th>
+                  <th rowspan="2" style="vertical-align:middle;text-align:center">TOTAL LOAN</th>
+                  <th colspan="2" style="text-align:center;border-bottom:1px solid #22406e">KFI DISBURSE</th>
+                  <th rowspan="2" style="vertical-align:middle;text-align:center">TOTAL KFI</th>
+                  <th colspan="2" style="text-align:center;border-bottom:1px solid #22406e">REJECT CASE</th>
+                  <th rowspan="2" style="vertical-align:middle;text-align:center;color:#f5c842">TOTAL</th>
+                </tr>
+                <tr>
+                  <th style="text-align:center">NORMAL</th>
+                  <th style="text-align:center">SPECIAL</th>
+                  <th style="text-align:center">RESUBMIT</th>
+                  <th style="text-align:center">NORMAL</th>
+                  <th style="text-align:center">SPECIAL</th>
+                  <th style="text-align:center">NORMAL</th>
+                  <th style="text-align:center">SPECIAL</th>
+                  <th style="text-align:center">KPI</th>
+                  <th style="text-align:center">KFI</th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(row,i) in kpiRows" :key="'p'+row.emp.id">
+                <tr v-for="(row,i) in kpiRows" :key="row.emp.id">
                   <td style="color:#7090b8;text-align:center">{{i+1}}</td>
                   <td><div class="te">{{row.emp.name}}</div><div class="te2">{{row.emp.position}}</div></td>
                   <td style="text-align:center">
-                    <input class="ci" style="width:4rem;text-align:center" type="number" min="0"
+                    <input class="ci" style="width:3.5rem;text-align:center" type="number" min="0"
                       :value="getKpiField(row.emp.id,'payslipNo')"
                       @change="upKpiField(row.emp.id,'payslipNo',$event.target.value)">
                   </td>
-                  <td style="text-align:right">
-                    <input class="ci" style="width:7rem;text-align:right" type="number" min="0" step="0.01"
-                      :value="getKpiField(row.emp.id,'kpiCommAmt')"
-                      @change="upKpiField(row.emp.id,'kpiCommAmt',$event.target.value)">
+                  <td style="text-align:center">
+                    <input class="ci" style="width:3.5rem;text-align:center" type="number" min="0"
+                      :value="getKpiField(row.emp.id,'kpiNormal')"
+                      @change="upKpiField(row.emp.id,'kpiNormal',$event.target.value)">
                   </td>
-                  <td style="text-align:right">
-                    <input class="ci" style="width:7rem;text-align:right" type="number" min="0" step="0.01"
-                      :value="getKpiField(row.emp.id,'kfiCommAmt')"
-                      @change="upKpiField(row.emp.id,'kfiCommAmt',$event.target.value)">
+                  <td style="text-align:center">
+                    <input class="ci" style="width:3.5rem;text-align:center" type="number" min="0"
+                      :value="getKpiField(row.emp.id,'kpiSpecial')"
+                      @change="upKpiField(row.emp.id,'kpiSpecial',$event.target.value)">
+                  </td>
+                  <td style="text-align:center">
+                    <input class="ci" style="width:3.5rem;text-align:center" type="number" min="0"
+                      :value="getKpiField(row.emp.id,'kpiResubmit')"
+                      @change="upKpiField(row.emp.id,'kpiResubmit',$event.target.value)">
+                  </td>
+                  <td style="text-align:center">
+                    <input class="ci" style="width:3.5rem;text-align:center" type="number" min="0"
+                      :value="getKpiField(row.emp.id,'resubmit')"
+                      @change="upKpiField(row.emp.id,'resubmit',$event.target.value)">
+                  </td>
+                  <td class="tn" style="text-align:center;font-weight:600;color:#dce8f8">
+                    {{(getKpiField(row.emp.id,'kpiNormal')*1)+(getKpiField(row.emp.id,'kpiSpecial')*1)+(getKpiField(row.emp.id,'kpiResubmit')*1)}}
+                  </td>
+                  <td style="text-align:center">
+                    <input class="ci" style="width:5rem;text-align:right" type="number" min="0"
+                      :value="getKpiField(row.emp.id,'loanNormal')"
+                      @change="upKpiField(row.emp.id,'loanNormal',$event.target.value)">
+                  </td>
+                  <td style="text-align:center">
+                    <input class="ci" style="width:5rem;text-align:right" type="number" min="0"
+                      :value="getKpiField(row.emp.id,'loanSpecial')"
+                      @change="upKpiField(row.emp.id,'loanSpecial',$event.target.value)">
+                  </td>
+                  <td class="tn" style="text-align:right;font-weight:600;color:#dce8f8">
+                    {{((getKpiField(row.emp.id,'loanNormal')*1)+(getKpiField(row.emp.id,'loanSpecial')*1)).toLocaleString()}}
+                  </td>
+                  <td style="text-align:center">
+                    <input class="ci" style="width:5rem;text-align:right" type="number" min="0"
+                      :value="getKpiField(row.emp.id,'kfiNormal')"
+                      @change="upKpiField(row.emp.id,'kfiNormal',$event.target.value)">
+                  </td>
+                  <td style="text-align:center">
+                    <input class="ci" style="width:5rem;text-align:right" type="number" min="0"
+                      :value="getKpiField(row.emp.id,'kfiSpecial')"
+                      @change="upKpiField(row.emp.id,'kfiSpecial',$event.target.value)">
+                  </td>
+                  <td class="tn" style="text-align:right;font-weight:600;color:#dce8f8">
+                    {{((getKpiField(row.emp.id,'kfiNormal')*1)+(getKpiField(row.emp.id,'kfiSpecial')*1)).toLocaleString()}}
+                  </td>
+                  <td style="text-align:center">
+                    <input class="ci" style="width:3.5rem;text-align:center" type="number" min="0"
+                      :value="getKpiField(row.emp.id,'rejectKpi')"
+                      @change="upKpiField(row.emp.id,'rejectKpi',$event.target.value)">
+                  </td>
+                  <td style="text-align:center">
+                    <input class="ci" style="width:5rem;text-align:right" type="number" min="0"
+                      :value="getKpiField(row.emp.id,'rejectKfi')"
+                      @change="upKpiField(row.emp.id,'rejectKfi',$event.target.value)">
                   </td>
                   <td class="tg" style="text-align:right;font-weight:700">
-                    {{((getKpiField(row.emp.id,'kpiCommAmt')*1)+(getKpiField(row.emp.id,'kfiCommAmt')*1)).toFixed(2)}}
+                    {{kpiRowTotal(row.emp.id).toLocaleString()}}
                   </td>
                 </tr>
               </tbody>
@@ -572,61 +634,6 @@ tr:hover td{background:rgba(201,168,76,.025)}
                 <tr class="tfoot-row" style="color:#e05555;font-weight:700">
                   <td colspan="2" style="text-align:right;font-size:.7rem">TOTAL</td>
                   <td style="text-align:center">{{kpiColSum('payslipNo')}}</td>
-                  <td style="text-align:right">{{kpiColSum('kpiCommAmt').toFixed(2)}}</td>
-                  <td style="text-align:right">{{kpiColSum('kfiCommAmt').toFixed(2)}}</td>
-                  <td class="tg" style="font-weight:700">{{(kpiColSum('kpiCommAmt')+kpiColSum('kfiCommAmt')).toFixed(2)}}</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-
-          <!-- SECTION 2: KPI Cases -->
-          <div style="color:#f5c842;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin:1.4rem 0 .4rem;padding-bottom:.3rem;border-bottom:1px solid #1e3660">
-            🏆 KPI — Case & Loan Report
-          </div>
-          <div class="tw" id="kpi-table">
-            <table>
-              <thead>
-                <tr>
-                  <th rowspan="2" style="vertical-align:middle">#</th>
-                  <th rowspan="2" style="vertical-align:middle">NAME</th>
-                  <th colspan="3" style="text-align:center;border-bottom:1px solid #22406e">KPI CASES</th>
-                  <th rowspan="2" style="vertical-align:middle;text-align:center">RESUBMIT</th>
-                  <th rowspan="2" style="vertical-align:middle;text-align:center">TOTAL KPI</th>
-                  <th colspan="2" style="text-align:center;border-bottom:1px solid #22406e">LOAN AMOUNT (RM)</th>
-                  <th rowspan="2" style="text-align:right;color:#f5c842;vertical-align:middle">TOTAL LOAN (RM)</th>
-                  <th rowspan="2" style="vertical-align:middle;text-align:center">REJECT</th>
-                </tr>
-                <tr>
-                  <th style="text-align:center">NORMAL</th>
-                  <th style="text-align:center">SPECIAL</th>
-                  <th style="text-align:center">RESUBMIT</th>
-                  <th style="text-align:right">NORMAL</th>
-                  <th style="text-align:right">SPECIAL</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(row,i) in kpiRows" :key="'k'+row.emp.id">
-                  <td style="color:#7090b8;text-align:center">{{i+1}}</td>
-                  <td><div class="te">{{row.emp.name}}</div><div class="te2">{{row.emp.position}}</div></td>
-                  <td style="text-align:center"><input class="ci" style="width:3.5rem;text-align:center" type="number" min="0" :value="getKpiField(row.emp.id,'kpiNormal')" @change="upKpiField(row.emp.id,'kpiNormal',$event.target.value)"></td>
-                  <td style="text-align:center"><input class="ci" style="width:3.5rem;text-align:center" type="number" min="0" :value="getKpiField(row.emp.id,'kpiSpecial')" @change="upKpiField(row.emp.id,'kpiSpecial',$event.target.value)"></td>
-                  <td style="text-align:center"><input class="ci" style="width:3.5rem;text-align:center" type="number" min="0" :value="getKpiField(row.emp.id,'kpiResubmit')" @change="upKpiField(row.emp.id,'kpiResubmit',$event.target.value)"></td>
-                  <td style="text-align:center"><input class="ci" style="width:3.5rem;text-align:center" type="number" min="0" :value="getKpiField(row.emp.id,'resubmit')" @change="upKpiField(row.emp.id,'resubmit',$event.target.value)"></td>
-                  <td class="tn" style="text-align:center;font-weight:600;color:#dce8f8">
-                    {{(getKpiField(row.emp.id,'kpiNormal')*1)+(getKpiField(row.emp.id,'kpiSpecial')*1)+(getKpiField(row.emp.id,'kpiResubmit')*1)}}
-                  </td>
-                  <td style="text-align:right"><input class="ci" style="width:7rem;text-align:right" type="number" min="0" :value="getKpiField(row.emp.id,'loanNormal')" @change="upKpiField(row.emp.id,'loanNormal',$event.target.value)"></td>
-                  <td style="text-align:right"><input class="ci" style="width:7rem;text-align:right" type="number" min="0" :value="getKpiField(row.emp.id,'loanSpecial')" @change="upKpiField(row.emp.id,'loanSpecial',$event.target.value)"></td>
-                  <td class="tg" style="text-align:right;font-weight:700">
-                    {{((getKpiField(row.emp.id,'loanNormal')*1)+(getKpiField(row.emp.id,'loanSpecial')*1)).toLocaleString()}}
-                  </td>
-                  <td style="text-align:center"><input class="ci" style="width:3.5rem;text-align:center" type="number" min="0" :value="getKpiField(row.emp.id,'rejectKpi')" @change="upKpiField(row.emp.id,'rejectKpi',$event.target.value)"></td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr class="tfoot-row" style="color:#e05555;font-weight:700">
-                  <td colspan="2" style="text-align:right;font-size:.7rem">TOTAL</td>
                   <td style="text-align:center">{{kpiColSum('kpiNormal')}}</td>
                   <td style="text-align:center">{{kpiColSum('kpiSpecial')}}</td>
                   <td style="text-align:center">{{kpiColSum('kpiResubmit')}}</td>
@@ -634,61 +641,19 @@ tr:hover td{background:rgba(201,168,76,.025)}
                   <td style="text-align:center">{{kpiColSum('kpiNormal')+kpiColSum('kpiSpecial')+kpiColSum('kpiResubmit')}}</td>
                   <td style="text-align:right">{{kpiColSum('loanNormal').toLocaleString()}}</td>
                   <td style="text-align:right">{{kpiColSum('loanSpecial').toLocaleString()}}</td>
-                  <td class="tg" style="font-weight:700">{{(kpiColSum('loanNormal')+kpiColSum('loanSpecial')).toLocaleString()}}</td>
-                  <td style="text-align:center">{{kpiColSum('rejectKpi')}}</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-
-          <!-- SECTION 3: KFI -->
-          <div style="color:#f5c842;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin:1.4rem 0 .4rem;padding-bottom:.3rem;border-bottom:1px solid #1e3660">
-            💼 KFI — Disburse Report
-          </div>
-          <div class="tw" id="kfi-table">
-            <table>
-              <thead>
-                <tr>
-                  <th rowspan="2" style="vertical-align:middle">#</th>
-                  <th rowspan="2" style="vertical-align:middle">NAME</th>
-                  <th colspan="2" style="text-align:center;border-bottom:1px solid #22406e">KFI DISBURSE (RM)</th>
-                  <th rowspan="2" style="text-align:right;color:#f5c842;vertical-align:middle">TOTAL KFI (RM)</th>
-                  <th rowspan="2" style="text-align:right;vertical-align:middle">REJECT KFI (RM)</th>
-                  <th rowspan="2" style="text-align:right;color:#f5c842;vertical-align:middle">GRAND TOTAL (RM)</th>
-                </tr>
-                <tr>
-                  <th style="text-align:right">NORMAL</th>
-                  <th style="text-align:right">SPECIAL</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(row,i) in kpiRows" :key="'f'+row.emp.id">
-                  <td style="color:#7090b8;text-align:center">{{i+1}}</td>
-                  <td><div class="te">{{row.emp.name}}</div><div class="te2">{{row.emp.position}}</div></td>
-                  <td style="text-align:right"><input class="ci" style="width:7rem;text-align:right" type="number" min="0" :value="getKpiField(row.emp.id,'kfiNormal')" @change="upKpiField(row.emp.id,'kfiNormal',$event.target.value)"></td>
-                  <td style="text-align:right"><input class="ci" style="width:7rem;text-align:right" type="number" min="0" :value="getKpiField(row.emp.id,'kfiSpecial')" @change="upKpiField(row.emp.id,'kfiSpecial',$event.target.value)"></td>
-                  <td class="tg" style="text-align:right;font-weight:700">
-                    {{((getKpiField(row.emp.id,'kfiNormal')*1)+(getKpiField(row.emp.id,'kfiSpecial')*1)).toLocaleString()}}
-                  </td>
-                  <td style="text-align:right"><input class="ci" style="width:7rem;text-align:right" type="number" min="0" :value="getKpiField(row.emp.id,'rejectKfi')" @change="upKpiField(row.emp.id,'rejectKfi',$event.target.value)"></td>
-                  <td class="tg" style="text-align:right;font-weight:700">{{kpiRowTotal(row.emp.id).toLocaleString()}}</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr class="tfoot-row" style="color:#e05555;font-weight:700">
-                  <td colspan="2" style="text-align:right;font-size:.7rem">TOTAL</td>
+                  <td style="text-align:right">{{(kpiColSum('loanNormal')+kpiColSum('loanSpecial')).toLocaleString()}}</td>
                   <td style="text-align:right">{{kpiColSum('kfiNormal').toLocaleString()}}</td>
                   <td style="text-align:right">{{kpiColSum('kfiSpecial').toLocaleString()}}</td>
-                  <td class="tg" style="font-weight:700">{{(kpiColSum('kfiNormal')+kpiColSum('kfiSpecial')).toLocaleString()}}</td>
+                  <td style="text-align:right">{{(kpiColSum('kfiNormal')+kpiColSum('kfiSpecial')).toLocaleString()}}</td>
+                  <td style="text-align:center">{{kpiColSum('rejectKpi')}}</td>
                   <td style="text-align:right">{{kpiColSum('rejectKfi').toLocaleString()}}</td>
                   <td class="tg" style="font-weight:700">{{kpiGrandTotal().toLocaleString()}}</td>
                 </tr>
               </tfoot>
             </table>
           </div>
-
-          <div style="margin-top:.8rem;color:#7090b8;font-size:.62rem;padding:.4rem .6rem;background:#111f38;border-radius:6px">
-            💡 Data auto-save setiap kali input. Klik <b>Print</b> untuk export semua 3 section dalam satu PDF.
+          <div style="margin-top:.6rem;color:#7090b8;font-size:.62rem;padding:.4rem .6rem;background:#111f38;border-radius:6px">
+            💡 <b>PAYSLIP</b> = jumlah payslip bulan ini (Basic of Performance) · <b>TOTAL</b> = Total Loan + Total KFI + Reject KFI
           </div>
         </template>
       </div>
@@ -1365,31 +1330,25 @@ createApp({
     };
 
     const printKPI = () => {
-      const perf = document.getElementById('perf-table');
-      const kpi  = document.getElementById('kpi-table');
-      const kfi  = document.getElementById('kfi-table');
-      const w = window.open('','_blank','width=1300,height=900');
-      const css = `@page{size:A4 landscape;margin:10mm}body{font-family:Arial,sans-serif;font-size:9.5px;color:#000}
-        h1{font-size:15px;margin:0 0 2px;text-align:center;font-weight:bold}
-        .sub{font-size:11px;text-align:center;color:#444;margin:0 0 10px}
-        h2{font-size:11px;margin:14px 0 4px;text-transform:uppercase;border-bottom:2px solid #000;padding-bottom:2px;font-weight:bold}
-        table{border-collapse:collapse;width:100%;margin-bottom:6px}
-        th,td{border:1px solid #aaa;padding:3px 5px;white-space:nowrap}
-        th{background:#ddd;font-weight:bold;text-align:center;font-size:9px}
-        td{font-size:9.5px}
-        input{border:none;background:transparent;font-size:9px;width:100%;text-align:inherit;pointer-events:none}
-        tfoot tr td{background:#f0c000;color:#000;font-weight:700;border-top:2px solid #000}
-        .tg{font-weight:700}`;
-      w.document.write('<html><head><title>Monthly Performance Report - '+rptLabel(kpiYM.value)+'</title><style>'+css+'</style></head><body>');
-      w.document.write('<h1>AWARA SDN BHD</h1>');
-      w.document.write('<div class="sub">MONTHLY PERFORMANCE REPORT &nbsp;&nbsp;|&nbsp;&nbsp; '+rptLabel(kpiYM.value)+'</div>');
-      if(perf){ w.document.write('<h2>📋 Basic Performance — Payslip / KPI / KFI Commission</h2>'); w.document.write(perf.outerHTML); }
-      if(kpi){  w.document.write('<h2>🏆 KPI — Case & Loan Report</h2>'); w.document.write(kpi.outerHTML); }
-      if(kfi){  w.document.write('<h2>💼 KFI — Disburse Report</h2>'); w.document.write(kfi.outerHTML); }
+      const tbl = document.getElementById('kpi-table');
+      if(!tbl) return;
+      const w = window.open('','_blank','width=1200,height=800');
+      w.document.write('<html><head><title>KPI/KFI Report - '+rptLabel(kpiYM.value)+'</title><style>');
+      w.document.write('body{font-family:Arial,sans-serif;font-size:10px;color:#000;margin:10mm}');
+      w.document.write('table{border-collapse:collapse;width:100%}');
+      w.document.write('th,td{border:1px solid #999;padding:3px 5px;white-space:nowrap}');
+      w.document.write('th{background:#ddd;font-weight:bold;text-align:center}');
+      w.document.write('input{border:none;background:transparent;font-size:10px;width:100%;text-align:inherit}');
+      w.document.write('tfoot tr td{background:#f5c842;color:#000;font-weight:700;border-top:2px solid #000}');
+      w.document.write('.tg{color:#000;font-weight:700}h2{margin:0 0 6px;font-size:14px}p{margin:0 0 8px;font-size:11px;color:#555}');
+      w.document.write('</style></head><body>');
+      w.document.write('<h2>AWARA SDN BHD — KPI / KFI Performance Report</h2>');
+      w.document.write('<p>Bulan: <b>'+rptLabel(kpiYM.value)+'</b></p>');
+      w.document.write(tbl.outerHTML);
       w.document.write('</body></html>');
       w.document.close();
       w.focus();
-      setTimeout(() => { w.print(); }, 600);
+      setTimeout(() => { w.print(); }, 500);
     };
 
 
